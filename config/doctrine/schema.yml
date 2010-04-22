@@ -1,0 +1,22 @@
+
+sfGuardUserProfileBasis:
+  actAs:
+    Timestampable: ~
+  tableName: sf_guard_user_profile
+  columns:
+    user_id:
+      type: integer(4)
+      notnull: true
+    email:
+      type: string(80)
+      notnull: true
+      unique: true
+    firstname:
+      type: string(30)
+    lastname:
+      type: string(70)
+    #TODO! Should be used by task that will erase all validate fields created x days ago and not used.
+    validate_at:
+      type: timestamp
+    validate:
+      type: string(33)

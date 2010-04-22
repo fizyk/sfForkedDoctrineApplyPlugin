@@ -1,0 +1,9 @@
+## YAML Template.
+all:
+  recaptcha:
+    enabled: false
+  sfForkedApply:
+    applyForm: sfApplyApplyForm
+    resetForm: sfApplyResetForm
+    resetRequestForm: sfApplyResetRequestForm
+    settingsForm: sfApplySettingsForm

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="##ENCODING##"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.1" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+  <name>sfForkedDoctrineApplyPlugin</name>
+  <channel>plugins.symfony-project.org</channel>
+  <summary>Add's register and profile functionality to websites protected with sfDoctrineGuardPlugin.</summary>
+  <description>This plugin is Forked version of sfDotrineApplyPlugin created by punkave guys.
+This Fork got stripped stripped of all dependencies from Zend Framework, introduced Profile model inheritance, small structural changes and few usability changes as well.</description>
+  <lead>
+    <name>Grzegorz Śliwiński</name>
+    <user>fizyk</user>
+    <email>fizyk@fizyk.net.pl</email>
+    <active>yes</active>
+  </lead>
+  <date>##CURRENT_DATE##</date>
+  <version>
+    <release>##PLUGIN_VERSION##</release>
+    <api>##API_VERSION##</api>
+  </version>
+  <stability>
+    <release>##STABILITY##</release>
+    <api>##STABILITY##</api>
+  </stability>
+  <license uri="http://www.symfony-project.org/license">MIT license</license>
+  <notes>-</notes>
+  <contents>
+    ##CONTENTS##
+  </contents>
+  <dependencies>
+    <required>
+      <php>
+        <min>5.2.4</min>
+      </php>
+      <pearinstaller>
+        <min>1.4.1</min>
+      </pearinstaller>
+      <package>
+        <name>symfony</name>
+        <channel>pear.symfony-project.com</channel>
+        <min>1.3.0</min>
+        <max>1.5.0</max>
+        <exclude>1.5.0</exclude>
+      </package>
+      <package>
+        <name>sfDoctrineGuardPlugin</name>
+        <channel>plugins.symfony-project.org</channel>
+        <min>4.0.0</min>
+        <max>4.1.0</max>
+        <exclude>4.1.0</exclude>
+    </package>
+    </required>
+  </dependencies>
+  <phprelease></phprelease>
+  <changelog>
+      <release>
+        <version>
+          <release>1.1.2</release>
+          <api>1.0.0</api>
+        </version>
+        <stability>
+         <release>stable</release>
+         <api>stable</api>
+        </stability>
+        <license uri="http://www.symfony-project.org/license">MIT license</license>
+        <date>2010-04-08</date>
+        <license>MIT</license>
+        <notes>
+            * fizyk: custom apply form can now use custom names
+        </notes>
+      </release>
+      <release>
+        <version>
+          <release>1.1.1</release>
+          <api>1.0.0</api>
+        </version>
+        <stability>
+         <release>stable</release>
+         <api>stable</api>
+        </stability>
+        <license uri="http://www.symfony-project.org/license">MIT license</license>
+        <date>2010-04-08</date>
+        <license>MIT</license>
+        <notes>
+            * fizyk: updated readme
+            * fizyk: added the ability to use custom ApplyForms
+            * Daniel Londero: added missing string (23) to italian sfForkedApply.xml
+        </notes>
+      </release>
+      <release>
+        <version>
+          <release>1.1.0</release>
+          <api>1.0.0</api>
+        </version>
+        <stability>
+         <release>stable</release>
+         <api>stable</api>
+        </stability>
+        <license uri="http://www.symfony-project.org/license">MIT license</license>
+        <date>2010-03-31</date>
+        <license>MIT</license>
+        <notes>
+            * fizyk: added basic css styles for forms
+            * Alessandro Rossi: adjusted italian translation
+            * fizyk: reorgainised i18n strings and adjusted polish translation
+            * fizyk: added recaptcha functionality to Apply and ResetRequests forms (based on vjCommentPlugin)
+            * fizyk: changed type of validate_at to timestamp from datetime. No change on generated sql (reported by Magician).
+        </notes>
+      </release>
+      <release>
+        <version>
+          <release>1.0.2</release>
+          <api>1.0.0</api>
+        </version>
+        <stability>
+         <release>stable</release>
+         <api>stable</api>
+        </stability>
+        <license uri="http://www.symfony-project.org/license">MIT license</license>
+        <date>2010-03-25</date>
+        <license>MIT</license>
+        <notes>
+            * Alessandro Rossi: Italian translation
+            * fizyk: removed string i18n pl: 46th (duplicate of 45th, reported by Alessandro Rossi)
+            * fizyk: removed minimum length requirements for name and lastname validators, they are required, so they have at least 1 character.
+            * fizyk: fixed 39th i18n strings it and pl
+        </notes>
+      </release>
+      <release>
+        <version>
+          <release>1.0.1</release>
+          <api>1.0.0</api>
+        </version>
+        <stability>
+         <release>stable</release>
+         <api>stable</api>
+        </stability>
+        <license uri="http://www.symfony-project.org/license">MIT license</license>
+        <date>2010-03-23</date>
+        <license>MIT</license>
+        <notes>
+            * fizyk: removed leftover require from sfApplyComponents
+            * fizyk: fixed typo in 13th i18n pl string.
+            * fizyk: added i18n pl strings: 55, 56, 57.
+            * fizyk: added new reset action template for logged in users.
+            * fizyk: moved all sfApply actions to the sfApplyActionsLibrary class, to allow override of actions. It wasn't possible before, as symfony would generate HTTP 404 response for all non overriden actions before.
+        </notes>
+      </release>
+      <release>
+        <version>
+          <release>1.0.0</release>
+          <api>1.0.0</api>
+        </version>
+        <stability>
+         <release>stable</release>
+         <api>stable</api>
+        </stability>
+        <license uri="http://www.symfony-project.org/license">MIT license</license>
+        <date>2010-03-18</date>
+        <license>MIT</license>
+        <notes>
+            * fizyk: fixed issue when logged user trying to reset his password was presented with 404 web site (reported by tnaseem).
+            * fizyk: removed all PHP's heredoc's &lt;&lt;&lt;EOM and replaced these with ordinary string, as they apparently didn't played well with i18n and didn't get relpaced by translated strings.
+        </notes>
+      </release>
+      <release>
+        <version>
+          <release>0.9.0</release>
+          <api>0.9.0</api>
+        </version>
+        <stability>
+         <release>beta</release>
+         <api>beta</api>
+        </stability>
+        <license uri="http://www.symfony-project.org/license">MIT license</license>
+        <date>2010-03-15</date>
+        <license>MIT</license>
+        <notes>
+            * stephenrs: Removed all Zend_Mail references and got back to SwiftMailer
+            * fizyk: Introduced simple inheritance for profile model.
+            * fizyk: Logged user won't get confirmation email when accidentally requesting password change.
+            * fizyk: Visitor can't get access to reset password page if not logged in, or haven't came through confirmation page.
+            * fizyk: Doubled the original confirmation string.
+            * fizyk: Moved action library class into appropriate folder
+            * fizyk: Added i18n pl strings
+        </notes>
+      </release>
+  </changelog>
+</package>
