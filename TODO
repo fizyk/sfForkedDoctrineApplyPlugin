@@ -1,8 +1,0 @@
-# sfForkedDoctrineApplyPlugin TODO #
-
-* task to clean old validate codes
-* setting that would allow disable email verification during registration
-* more i18n!
-* possibility to edit emails
-* Edit form to add to the sfGuardUser module, or module for forms.
-* Routes listener, that will add routes to app
