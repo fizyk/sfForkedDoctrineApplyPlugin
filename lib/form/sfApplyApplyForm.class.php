@@ -182,7 +182,7 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
         // is part of how their account is verified by email.
 
         unset($this['user_id'], $this['validate'], $this['validate_at'],
-                $this['created_at'], $this['updated_at']);
+                $this['created_at'], $this['updated_at'], $this['email_new']);
 
     }
 

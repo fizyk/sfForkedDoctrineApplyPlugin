@@ -11,6 +11,9 @@ sfGuardUserProfileBasis:
       type: string(80)
       notnull: true
       unique: true
+    email_new:
+      type: string(80)
+      unique: true
     firstname:
       type: string(30)
     lastname:
