@@ -255,7 +255,7 @@ class sfApplyActionsLibrary extends sfActions
         $this->form->bind($request->getParameter( $this->form->getName() ));
         if ($this->form->isValid())
         {
-          $profile = $this->getUser()->getGuardUser();
+          $profile = $this->getUser()->getGuardUser()->getProfile();
           $profile->setEmailNew( $this->form->getValue( 'email' ) );
           $profile->setValidate('e' . self::createGuid());
           $profile->save();
@@ -264,10 +264,10 @@ class sfApplyActionsLibrary extends sfActions
                                                     array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
             'fullname' => $profile->getFullname(),
             'email' => $profile->getEmail(),
-            'parameters' => array('fullname' => $profile->getFullname(),
+            'parameters' => array('username' => $profile->getUser()->getUsername(),
                                   'validate' => $profile->getValidate(),
-                                  'oldemail' => $profile->getEmail(),
-                                  'newemail' => $profile->getEmailNew() ),
+                                  'oldmail' => $profile->getEmail(),
+                                  'newmail' => $profile->getEmailNew() ),
             'text' => 'sfApply/sendValidateEmailText',
             'html' => 'sfApply/sendValidateEmail'));
           //TODO! Here add code to send confirmation emails
