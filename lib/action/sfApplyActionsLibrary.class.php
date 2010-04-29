@@ -139,26 +139,30 @@ class sfApplyActionsLibrary extends sfActions
             ->fetchOne();
         if (!$sfGuardUser)
         {
-            return 'Invalid';
+          return 'Invalid';
         }
         $type = self::getValidationType($validate);
         if (!strlen($validate))
         {
-            return 'Invalid';
+          return 'Invalid';
         }
         $profile = $sfGuardUser->getProfile();
         $profile->setValidate(null);
         $profile->save();
         if ($type == 'New')
         {
-            $sfGuardUser->setIsActive(true);
-            $sfGuardUser->save();
-            $this->getUser()->signIn($sfGuardUser);
+          $sfGuardUser->setIsActive(true);
+          $sfGuardUser->save();
+          $this->getUser()->signIn($sfGuardUser);
         }
         if ($type == 'Reset')
         {
-            $this->getUser()->setAttribute('sfApplyReset', $sfGuardUser->getId());
-            return $this->redirect('sfApply/reset');
+          $this->getUser()->setAttribute('sfApplyReset', $sfGuardUser->getId());
+          return $this->redirect('sfApply/reset');
+        }
+        if( $type == 'Email' )
+        {
+          //TODO! serve the email change confirmation here
         }
     }
 
@@ -242,6 +246,37 @@ class sfApplyActionsLibrary extends sfActions
             }
         }
     }
+
+    public function executeEditEmail(sfRequest $request)
+    {
+      $this->form = new sfApplyEditEmailForm();
+      if ($request->isMethod('post'))
+      {
+        $this->form->bind($request->getParameter( $this->form->getName() ));
+        if ($this->form->isValid())
+        {
+          $profile = $this->getUser()->getGuardUser();
+          $profile->setEmailNew( $this->form->getValue( 'email' ) );
+          $profile->setValidate('e' . self::createGuid());
+          $profile->save();
+          $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
+            sfContext::getInstance()->getI18N()->__("Please verify your account on %1%",
+                                                    array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
+            'fullname' => $profile->getFullname(),
+            'email' => $profile->getEmail(),
+            'parameters' => array('fullname' => $profile->getFullname(),
+                                  'validate' => $profile->getValidate(),
+                                  'oldemail' => $profile->getEmail(),
+                                  'newemail' => $profile->getEmailNew() ),
+            'text' => 'sfApply/sendValidateEmailText',
+            'html' => 'sfApply/sendValidateEmail'));
+          //TODO! Here add code to send confirmation emails
+//            return $this->redirect('@homepage');
+        }
+      }
+
+    }
+
     /**
      * gets From information for email. may throw Exception.
      * @return array
@@ -342,13 +377,17 @@ class sfApplyActionsLibrary extends sfActions
     static public function getValidationType($validate)
     {
         $t = substr($validate, 0, 1);
-        if ($t == 'n')
+        if( $t == 'n' )
         {
             return 'New';
         }
-        elseif ($t == 'r')
+        elseif( $t == 'r' )
         {
             return 'Reset';
+        }
+        elseif( $t == 'e' )
+        {
+          return 'Email';
         }
         else
         {
