@@ -260,7 +260,7 @@ class sfApplyActionsLibrary extends sfActions
           $profile->setValidate('e' . self::createGuid());
           $profile->save();
           $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
-            sfContext::getInstance()->getI18N()->__("Please verify your account on %1%",
+            sfContext::getInstance()->getI18N()->__("Please verify your email on %1%",
                                                     array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
             'fullname' => $profile->getFullname(),
             'email' => $profile->getEmail(),
