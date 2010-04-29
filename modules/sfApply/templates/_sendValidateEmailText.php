@@ -11,10 +11,10 @@ To continue with your change, click on the link that follows:
 
 Your email will then be changed pemanently.'
 , array(
-  "%1%" => link_to($sf_request->getHost(), $sf_request->getUriPrefix()),
-  "%2%" => link_to(url_for("sfApply/confirm?validate=$validate", true), "sfApply/confirm?validate=$validate", array("absolute" => true)),
+  "%1%" => $sf_request->getHost(),
+  "%2%" => url_for("sfApply/confirm?validate=$validate", true),
   "%USERNAME%" => $username,
-  "OLDEMAIL" => $odlemail,
-  "%NEWEMAIL" => $newemail
+  "%OLDEMAIL%" => $oldmail,
+  "%NEWEMAIL%" => $newmail
   ),
     'sfForkedApply') ?>
