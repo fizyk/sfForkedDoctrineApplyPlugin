@@ -291,6 +291,64 @@ To konto jest nieaktywne. Proszę skontaktuj się z administratorem.
         <source>Unable to check the captcha from the server (%error%).</source>
         <target>Brak możliwości sprawdzenia captcha na serwerze (%error%).</target>
       </trans-unit>
+      <trans-unit id="37" approved="yes">
+        <source>Please verify your email on %1%</source>
+        <target>Proszę zweryfikować swój adres email na %1%</target>
+      </trans-unit>
+      <trans-unit id="38" approved="yes">
+        <source>
+&lt;p&gt;
+Hello %USERNAME%!
+&lt;/p&gt;&lt;p&gt;
+We have received your request to change your email address on: %1%
+&lt;/p&gt;&lt;p&gt;
+You're going to &lt;b&gt;change&lt;/b&gt; your email from: &lt;b&gt;%OLDEMAIL%&lt;/b&gt; to &lt;b&gt;%NEWEMAIL%&lt;/b&gt;
+&lt;/p&gt;&lt;p&gt;
+To continue with your change, click on the link that follows:
+&lt;/p&gt;&lt;p&gt;
+%2%
+&lt;/p&gt;&lt;p&gt;
+Your email will then be changed permanently.
+&lt;/p&gt;</source>
+        <target>
+&lt;p&gt;
+Witaj %USERNAME%!
+&lt;/p&gt;&lt;p&gt;
+Otrzymaliśmy twoją prośbę o zmianę adresu email na stronie: %1%
+&lt;/p&gt;&lt;p&gt;
+Zamierzasz &lt;b&gt;zmienić&lt;/b&gt; swój adres email z: &lt;b&gt;%OLDEMAIL%&lt;/b&gt; na &lt;b&gt;%NEWEMAIL%&lt;/b&gt;
+&lt;/p&gt;&lt;p&gt;
+By kontynuować kliknij na poniższy odnośnik:
+&lt;/p&gt;&lt;p&gt;
+%2%
+&lt;/p&gt;&lt;p&gt;
+Twój adres email zostanie zmieniony na stałe.
+&lt;/p&gt;</target>
+      </trans-unit>
+      <trans-unit id="39" approved="yes">
+        <source>Hello %USERNAME%!
+
+We have received your request to change your email address on: %1%
+
+You're going to change your email from: %OLDEMAIL% to %NEWEMAIL%
+
+To continue with your change, click on the link that follows:
+
+%2%
+
+Your email will then be changed pemanently.</source>
+        <target>Witaj %USERNAME%!
+
+Otrzymaliśmy twoją prośbę o zmianę adresu email na stronie: %1%
+
+Zamierzasz &lt;b&gt;zmienić&lt;/b&gt; swój adres email z: &lt;b&gt;%OLDEMAIL%&lt;/b&gt; na &lt;b&gt;%NEWEMAIL%&lt;/b&gt;
+
+By kontynuować kliknij na poniższy odnośnik:
+
+%2%
+
+Twój adres email zostanie zmieniony na stałe.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
