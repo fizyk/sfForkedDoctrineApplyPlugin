@@ -11,7 +11,6 @@ class sfApplyActionsLibrary extends sfActions
     //When user is applying for new account
     public function executeApply(sfRequest $request)
     {
-      var_dump( sfConfig::get( 'app_sfForkedApply_confirmation' ) );
         // we're getting default or customized applyForm for the task
         if( !( ($this->form = $this->newForm( 
                 sfConfig::get( 'app_sfForkedApply_applyForm', 'sfApplyApplyForm' ))
@@ -276,25 +275,38 @@ class sfApplyActionsLibrary extends sfActions
         if ($this->form->isValid())
         {
           $profile = $this->getUser()->getGuardUser()->getProfile();
-          $profile->setEmailNew( $this->form->getValue( 'email' ) );
-          $profile->setValidate('e' . self::createGuid());
-          $profile->save();
-          $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
-            sfContext::getInstance()->getI18N()->__("Please verify your email on %1%",
-                                                    array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
-            'fullname' => $profile->getFullname(),
-            'email' => $profile->getEmail(),
-            'parameters' => array('username' => $profile->getUser()->getUsername(),
-                                  'validate' => $profile->getValidate(),
-                                  'oldmail' => $profile->getEmail(),
-                                  'newmail' => $profile->getEmailNew() ),
-            'text' => 'sfApply/sendValidateEmailText',
-            'html' => 'sfApply/sendValidateEmail'));
-          $this->getUser()->setFlash( 'sf_forked_apply',
-              sfContext::getInstance()->getI18N()->
-              __( 'To complete email change, follow a link included in a confirmation email we have sent to your old email address: %OLDEMAIL%.', 
-                  array( '%OLDEMAIL%' => $profile->getEmail() ), 'sfForkedApply' ) );
-            return $this->redirect('@settings');
+          $confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' );
+          if( $confirmation['email'] )
+          {
+            $profile->setEmailNew( $this->form->getValue( 'email' ) );
+            $profile->setValidate('e' . self::createGuid());
+            $profile->save();
+            $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
+              sfContext::getInstance()->getI18N()->__("Please verify your email on %1%",
+                                                      array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
+              'fullname' => $profile->getFullname(),
+              'email' => $profile->getEmail(),
+              'parameters' => array('username' => $profile->getUser()->getUsername(),
+                                    'validate' => $profile->getValidate(),
+                                    'oldmail' => $profile->getEmail(),
+                                    'newmail' => $profile->getEmailNew() ),
+              'text' => 'sfApply/sendValidateEmailText',
+              'html' => 'sfApply/sendValidateEmail'));
+            $this->getUser()->setFlash( 'sf_forked_apply',
+                sfContext::getInstance()->getI18N()->
+                __( 'To complete email change, follow a link included in a confirmation email we have sent to your old email address: %OLDEMAIL%.',
+                    array( '%OLDEMAIL%' => $profile->getEmail() ), 'sfForkedApply' ) );
+          }
+          else
+          {
+            $profile->setEmail( $this->form->getValue( 'email' ) );
+            $profile->save();
+            $this->getUser()->setFlash( 'sf_forked_apply',
+                sfContext::getInstance()->getI18N()->
+                __( 'Your email has been changed.',
+                    array(), 'sfForkedApply' ) );
+          }
+          return $this->redirect('@settings');
         }
       }
 

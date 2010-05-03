@@ -10,5 +10,5 @@ all:
     mail_editable: false
     confirmation:
       reset: true
-      apply: false
+      apply: true
       email: true
