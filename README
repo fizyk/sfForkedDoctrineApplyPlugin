@@ -30,7 +30,7 @@ Installation should be simple as:
 
 However it is also possible to install it through archive:
 
-    symfony plugin:install sfForkedDoctrineApplyPlugin-1.1.2.tgz
+    symfony plugin:install sfForkedDoctrineApplyPlugin-1.2.0.tgz
 
 just place downloaded package in your project's root first.
 
@@ -77,7 +77,7 @@ as not null in database. Build your model after those steps, or create migration
 Review your migration files after this step, and run:
 
     ./symfony doctrine:migrate
-    ./symfony doctrine:build --model --forms --filters --sql
+    ./symfony doctrine:build --all-classes
 
 All you need to do is to enable sfApply module in your settings.yml file:
 
@@ -176,6 +176,43 @@ Since version 1.1.1, it is possible to define own, custom forms for apply action
         settingsForm: sfApplySettingsForm
 
 The above example uses standard sfApplyForms.
+
+###Email editing###
+
+To allow users to edit their emails, you've got to add app_sfForkedApply_mail_editable setting:
+
+    all:
+      #...
+      sfForkedApply:
+        #...
+        mail_editable: false
+
+And then add route to your apps routning.yml file:
+
+    editEmail:
+      url: /user/settings/email
+      param: { module: sfApply, action: editEmail }
+
+Now, when user will try to edit their email, he'll receive confirmation email on his old address.
+
+###Confirmation disabling###
+
+It is possible, although not recommended to disable email confirmations for the following actions:
+
+* Apply - new users will be registered and logged as soon as they submit valid apply form.
+* Password reset - this will disable the reset request, password change will be possible only for logged in users.
+* Email edit - new email will immediately replace old one.
+
+To disable confirmation emails for any of this actions, simply add and modify following options to application's app.yml file:
+
+    all:
+      #...
+      sfForkedApply:
+        #...
+        confirmation:
+          reset: true
+          apply: true
+          email: true
 
 ###Login redirect###
 
