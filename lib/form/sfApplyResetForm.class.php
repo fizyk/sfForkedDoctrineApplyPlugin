@@ -23,5 +23,10 @@ class sfApplyResetForm extends sfForm
             new sfValidatorSchemaCompare( 'password', sfValidatorSchemaCompare::EQUAL,
                     'password2', array(), array('invalid' => 'The passwords did not match.')));
   }
+
+  public function getStylesheets()
+  {
+    return array( '/sfForkedDoctrineApplyPlugin/css/forked' => 'all' );
+  }
 }
 

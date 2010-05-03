@@ -24,12 +24,19 @@
     margin: 2px 0px;
 }
 
+.sf_apply li.submit_row
+{
+    margin-left: 155px;
+    border-left: 1px solid #979d9d;
+    padding-left: 10px;
+}
+
 .sf_apply li:hover
 {
     background-color: #cdcdcd;
 }
 
-.sf_apply li.sf_apply_submit_row:hover
+.sf_apply li.submit_row:hover
 {
     background-color: transparent;
 }

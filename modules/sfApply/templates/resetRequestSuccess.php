@@ -12,7 +12,7 @@ a link permitting you to change your password if you wish.', array(), 'sfForkedA
 </p>
 <ul>
 <?php echo $form ?>
-<li>
+<li class="submit_row">
 <input type="submit" value="<?php echo __("Reset My Password", array(), 'sfForkedApply') ?>">
 <?php echo __("or", array(), 'sfForkedApply') ?> 
 <?php echo link_to(__('Cancel', array(), 'sfForkedApply'), sfConfig::get('app_sfApplyPlugin_after', '@homepage')) ?>
