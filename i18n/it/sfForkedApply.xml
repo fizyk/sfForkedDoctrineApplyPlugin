@@ -30,7 +30,7 @@ Grazie ancora per esserti registrato.
       </trans-unit>
       <trans-unit id="3" approved="yes">
         <source>&lt;p&gt;
-That confirmation code is invalid. 
+That confirmation code is invalid.
 &lt;/p&gt;&lt;p&gt;
 This may be because you have already confirmed your account. If so,
 just click on the "Log In" button to log in.

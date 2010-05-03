@@ -448,8 +448,9 @@ class sfApplyActionsLibrary extends sfActions
         try
         {
             $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_reset_subject',
-                    sfContext::getInstance()->getI18N()->__("Please verify your password reset request on %1%",
-                                                            array('%1%' => $this->getRequest()->getHost()), array(), 'sfForkedApply')),
+                    sfContext::getInstance()->getI18N()
+                    ->__("Please verify your password reset request on %1%",
+                    array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
                 'fullname' => $profile->getFullname(),
                 'email' => $profile->getEmail(),
                 'parameters' => array('fullname' => $profile->getFullname(),

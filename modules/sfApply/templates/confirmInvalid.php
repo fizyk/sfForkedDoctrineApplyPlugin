@@ -1,7 +1,7 @@
 <?php use_helper('I18N') ?>
 <div class="sf_apply_notice">
 <?php echo __('<p>
-That confirmation code is invalid. 
+That confirmation code is invalid.
 </p><p>
 This may be because you have already confirmed your account. If so,
 just click on the "Log In" button to log in.

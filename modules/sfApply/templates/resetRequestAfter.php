@@ -3,7 +3,7 @@
 <?php end_slot() ?>
 <div class="sf_apply_notice">
 <?php echo __('<p>
-For security reasons, a confirmation message has been sent to 
+For security reasons, a confirmation message has been sent to
 the email address associated with this account. Please check your
 email for that message. You will need to click on a link provided
 in that email in order to change your password. If you do not see
