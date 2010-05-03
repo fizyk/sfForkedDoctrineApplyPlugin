@@ -162,7 +162,14 @@ class sfApplyActionsLibrary extends sfActions
         }
         if( $type == 'Email' )
         {
-          //TODO! serve the email change confirmation here
+          $profile->setEmail( $profile->getEmailNew() );
+          $profile->setEmailNew( null );
+          $profile->save();
+          $this->getUser()->setFlash( 'sf_forked_apply',
+              sfContext::getInstance()->getI18N()->
+              __( 'Your email has been changed.',
+                  array(), 'sfForkedApply' ) );
+          return $this->redirect( '@homepage' );
         }
     }
 

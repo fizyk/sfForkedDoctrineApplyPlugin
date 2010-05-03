@@ -341,13 +341,25 @@ Your email will then be changed pemanently.</source>
 
 Otrzymaliśmy twoją prośbę o zmianę adresu email na stronie: %1%
 
-Zamierzasz &lt;b&gt;zmienić&lt;/b&gt; swój adres email z: &lt;b&gt;%OLDEMAIL%&lt;/b&gt; na &lt;b&gt;%NEWEMAIL%&lt;/b&gt;
+Zamierzasz zmienić swój adres email z: %OLDEMAIL% na %NEWEMAIL%
 
 By kontynuować kliknij na poniższy odnośnik:
 
 %2%
 
 Twój adres email zostanie zmieniony na stałe.</target>
+      </trans-unit>
+      <trans-unit id="40" approved="yes">
+        <source>Edit Email</source>
+        <target>Edytuj adres e-mail</target>
+      </trans-unit>
+      <trans-unit id="41" approved="yes">
+        <source>To complete email change, follow a link included in a confirmation email we have sent to your old email address: %OLDEMAIL%.</source>
+        <target>By ukończyć preocedurę zmiany adresu email, odwiedź odnośnik zawarty w emailu potwierdzającym, który wysłaliśmy ci na stary adres: %OLDEMAIL%.</target>
+      </trans-unit>
+      <trans-unit id="42" approved="yes">
+        <source>Your email has been changed.</source>
+        <target>Twój adres e-mail został zmieniony.</target>
       </trans-unit>
     </body>
   </file>
