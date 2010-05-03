@@ -7,3 +7,4 @@ all:
     resetForm: sfApplyResetForm
     resetRequestForm: sfApplyResetRequestForm
     settingsForm: sfApplySettingsForm
+    mail_editable: false

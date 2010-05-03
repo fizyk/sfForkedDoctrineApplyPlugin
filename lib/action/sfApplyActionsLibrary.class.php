@@ -162,14 +162,18 @@ class sfApplyActionsLibrary extends sfActions
         }
         if( $type == 'Email' )
         {
-          $profile->setEmail( $profile->getEmailNew() );
-          $profile->setEmailNew( null );
-          $profile->save();
-          $this->getUser()->setFlash( 'sf_forked_apply',
-              sfContext::getInstance()->getI18N()->
-              __( 'Your email has been changed.',
-                  array(), 'sfForkedApply' ) );
-          return $this->redirect( '@homepage' );
+          if( sfConfig::get( 'app_sfForkedApply_mail_editable' ) )
+          {
+            $profile->setEmail( $profile->getEmailNew() );
+            $profile->setEmailNew( null );
+            $profile->save();
+            $this->getUser()->setFlash( 'sf_forked_apply',
+                sfContext::getInstance()->getI18N()->
+                __( 'Your email has been changed.',
+                    array(), 'sfForkedApply' ) );
+            return $this->redirect( '@homepage' );
+          }
+          return 'Invalid';
         }
     }
 
@@ -256,6 +260,7 @@ class sfApplyActionsLibrary extends sfActions
 
     public function executeEditEmail(sfRequest $request)
     {
+      $this->forward404Unless( sfConfig::get( 'app_sfForkedApply_mail_editable' ) );
       $this->form = new sfApplyEditEmailForm();
       if ($request->isMethod('post'))
       {
