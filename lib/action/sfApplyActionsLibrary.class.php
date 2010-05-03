@@ -75,62 +75,65 @@ class sfApplyActionsLibrary extends sfActions
     //Processes reset requests
     public function executeResetRequest(sfRequest $request)
     {
-        $user = $this->getUser();
+      $user = $this->getUser();
 
-        if ($user->isAuthenticated())
+      if ($user->isAuthenticated())
+      {
+        $this->redirect( 'sfApply/reset' );
+      }
+      else
+      {
+        $confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' );
+
+        $this->forward404If( !$confirmation['reset'] );
+        // we're getting default or customized resetRequestForm for the task
+        if( !( ($this->form = $this->newForm(
+                sfConfig::get( 'app_sfForkedApply_resetRequestForm', 'sfApplyResetRequestForm' ) )
+                ) instanceof sfApplyResetRequestForm) )
         {
-            $this->redirect( 'sfApply/reset' );
+          // if the form isn't instance of sfApplySettingsForm, we don't accept it
+          throw new InvalidArgumentException(
+                  'The custom resetRequest form should be instance of sfApplyResetRequestForm'
+                  );
         }
-        else
+        if ($request->isMethod('post'))
         {
-            // we're getting default or customized resetRequestForm for the task
-            if( !( ($this->form = $this->newForm(
-                    sfConfig::get( 'app_sfForkedApply_resetRequestForm', 'sfApplyResetRequestForm' ) )
-                    ) instanceof sfApplyResetRequestForm) )
-            {
-                // if the form isn't instance of sfApplySettingsForm, we don't accept it
-                throw new InvalidArgumentException( 
-                        'The custom resetRequest form should be instance of sfApplyResetRequestForm'
-                        );
-            }
-            if ($request->isMethod('post'))
-            {
-                //gathering form request in one array
-                $formValues = $request->getParameter( $this->form->getName() );
-                if(sfConfig::get('app_recaptcha_enabled') )
-                {
-                    $captcha = array(
-                      'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),
-                      'recaptcha_response_field'  => $request->getParameter('recaptcha_response_field'),
-                    );
-                    //Adding captcha to form array
-                    $formValues = array_merge( $formValues, array('captcha' => $captcha)  );
-                }
-                //binding request form parameters with form
-                $this->form->bind($formValues);
-                if ($this->form->isValid())
-                {
-                    // The form matches unverified users, but retrieveByUsername does not, so
-                    // use an explicit query. We'll special-case the unverified users in
-                    // resetRequestBody
+          //gathering form request in one array
+          $formValues = $request->getParameter( $this->form->getName() );
+          if(sfConfig::get('app_recaptcha_enabled') )
+          {
+            $captcha = array(
+              'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),
+              'recaptcha_response_field'  => $request->getParameter('recaptcha_response_field'),
+            );
+            //Adding captcha to form array
+            $formValues = array_merge( $formValues, array('captcha' => $captcha)  );
+          }
+          //binding request form parameters with form
+          $this->form->bind($formValues);
+          if ($this->form->isValid())
+          {
+            // The form matches unverified users, but retrieveByUsername does not, so
+            // use an explicit query. We'll special-case the unverified users in
+            // resetRequestBody
 
-                    $username_or_email = $this->form->getValue('username_or_email');
-                    if (strpos($username_or_email, '@') !== false)
-                    {
-                        $user = Doctrine::getTable('sfGuardUser')->createQuery('u')->
-                                innerJoin('u.Profile p')->where('p.email = ?', $username_or_email)->
-                                fetchOne();
+            $username_or_email = $this->form->getValue('username_or_email');
+            if (strpos($username_or_email, '@') !== false)
+            {
+              $user = Doctrine::getTable('sfGuardUser')->createQuery('u')->
+                      innerJoin('u.Profile p')->where('p.email = ?', $username_or_email)->
+                      fetchOne();
 
-                    }
-                    else
-                    {
-                        $user = Doctrine::getTable('sfGuardUser')->createQuery('u')->
-                                where('username = ?', $username_or_email)->fetchOne();
-                    }
-                    return $this->resetRequestBody($user);
-                }
             }
+            else
+            {
+              $user = Doctrine::getTable('sfGuardUser')->createQuery('u')->
+                      where('username = ?', $username_or_email)->fetchOne();
+            }
+            return $this->resetRequestBody($user);
+          }
         }
+      }
     }
 
     public function executeConfirm(sfRequest $request)
