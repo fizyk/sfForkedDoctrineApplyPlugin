@@ -11,6 +11,7 @@ class sfApplyActionsLibrary extends sfActions
     //When user is applying for new account
     public function executeApply(sfRequest $request)
     {
+      var_dump( sfConfig::get( 'app_sfForkedApply_confirmation' ) );
         // we're getting default or customized applyForm for the task
         if( !( ($this->form = $this->newForm( 
                 sfConfig::get( 'app_sfForkedApply_applyForm', 'sfApplyApplyForm' ))
@@ -39,26 +40,35 @@ class sfApplyActionsLibrary extends sfActions
             $this->form->bind($formValues);
             if ($this->form->isValid())
             {
-                $guid = "n" . self::createGuid();
-                $this->form->setValidate($guid);
-                $this->form->save();
+              $guid = "n" . self::createGuid();
+              $this->form->setValidate($guid);
+              $this->form->save();
+              $confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' );
+              if( $confirmation['apply'] )
+              {
                 try
                 {
-                    //Extracting object and sending creating verification mail
-                    $profile = $this->form->getObject();
-                    $this->sendVerificationMail($profile);
-                    return 'After';
+                  //Extracting object and sending creating verification mail
+                  $profile = $this->form->getObject();
+                  $this->sendVerificationMail($profile);
+                  return 'After';
                 }
                 catch (Exception $e)
                 {
-                    //Cleaning after possible exception thrown in ::sendVerificationMail() method
-                    $profile = $this->form->getObject();
-                    $user = $profile->getUser();
-                    $user->delete();
-                    // You could re-throw $e here if you want to
-                    // make it available for debugging purposes
-                    return 'MailerError';
+                  //Cleaning after possible exception thrown in ::sendVerificationMail() method
+                  $profile = $this->form->getObject();
+                  $user = $profile->getUser();
+                  $user->delete();
+                  // You could re-throw $e here if you want to
+                  // make it available for debugging purposes
+                  return 'MailerError';
                 }
+              }
+              else
+              {
+                $this->activateUser( $this->form->getObject()->getUser() );
+                return $this->redirect( '@homepage' );
+              }
             }
         }
     }
@@ -151,9 +161,7 @@ class sfApplyActionsLibrary extends sfActions
         $profile->save();
         if ($type == 'New')
         {
-          $sfGuardUser->setIsActive(true);
-          $sfGuardUser->save();
-          $this->getUser()->signIn($sfGuardUser);
+          $this->activateUser( $sfGuardUser );
         }
         if ($type == 'Reset')
         {
@@ -369,6 +377,18 @@ class sfApplyActionsLibrary extends sfActions
             return new $class($object);
         }
         return new $class;
+    }
+
+    /**
+     * Method to activate user
+     * @param sfGuardUser $user
+     * @author Grzegorz Śliwiński
+     */
+    protected function activateUser( sfGuardUser $user )
+    {
+      $user->setIsActive(true);
+      $user->save();
+      $this->getUser()->signIn($user);
     }
     
     static public function createGuid()

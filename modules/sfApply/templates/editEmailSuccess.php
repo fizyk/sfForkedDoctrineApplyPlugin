@@ -1,4 +1,3 @@
-<?php //TODO! fix this later ?>
 <?php use_stylesheets_for_form( $form ) ?>
 <?php use_helper("I18N") ?>
 <div class="sf_apply sf_apply_settings">
