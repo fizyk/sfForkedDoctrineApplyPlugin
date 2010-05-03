@@ -270,8 +270,11 @@ class sfApplyActionsLibrary extends sfActions
                                   'newmail' => $profile->getEmailNew() ),
             'text' => 'sfApply/sendValidateEmailText',
             'html' => 'sfApply/sendValidateEmail'));
-          //TODO! Here add code to send confirmation emails
-//            return $this->redirect('@homepage');
+          $this->getUser()->setFlash( 'sf_forked_apply',
+              sfContext::getInstance()->getI18N()->
+              __( 'To complete email change, follow a link included in a confirmation email we have sent to your old email address: %OLDEMAIL%.', 
+                  array( '%OLDEMAIL%' => $profile->getEmail() ), 'sfForkedApply' ) );
+            return $this->redirect('@settings');
         }
       }
 
