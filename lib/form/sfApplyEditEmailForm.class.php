@@ -14,6 +14,7 @@ class sfApplyEditEmailForm extends sfForm
         )));
 
     $this->widgetSchema->setNameFormat('sfApplyEditEmail[%s]');
+    $this->widgetSchema->setFormFormatterName('list');
   }
 
   public function getStylesheets()
