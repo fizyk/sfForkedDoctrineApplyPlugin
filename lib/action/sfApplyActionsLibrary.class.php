@@ -11,65 +11,70 @@ class sfApplyActionsLibrary extends sfActions
     //When user is applying for new account
     public function executeApply(sfRequest $request)
     {
-        // we're getting default or customized applyForm for the task
-        if( !( ($this->form = $this->newForm( 
-                sfConfig::get( 'app_sfForkedApply_applyForm', 'sfApplyApplyForm' ))
-                ) instanceof sfApplyApplyForm) )
-        {
-            // if the form isn't instance of sfApplyApplyForm, we don't accept it
-            throw new InvalidArgumentException(
-                    'The custom apply form should be instance of sfApplyApplyForm' );
-        }
+      // we're getting default or customized applyForm for the task
+      if( !( ($this->form = $this->newForm(
+              sfConfig::get( 'app_sfForkedApply_applyForm', 'sfApplyApplyForm' ))
+              ) instanceof sfApplyApplyForm) )
+      {
+          // if the form isn't instance of sfApplyApplyForm, we don't accept it
+        throw new InvalidArgumentException(
+                'The custom apply form should be instance of sfApplyApplyForm' );
+      }
 
-        //Code below is used when user is sending his application!
-        if( $request->isMethod('post') )
+      //Code below is used when user is sending his application!
+      if( $request->isMethod('post') )
+      {
+        //gathering form request in one array
+        $formValues = $request->getParameter( $this->form->getName() );
+        if(sfConfig::get('app_recaptcha_enabled') )
         {
-            //gathering form request in one array
-            $formValues = $request->getParameter( $this->form->getName() );
-            if(sfConfig::get('app_recaptcha_enabled') )
-            {
-                $captcha = array(
-                  'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),
-                  'recaptcha_response_field'  => $request->getParameter('recaptcha_response_field'),
-                );
-                //Adding captcha to form array
-                $formValues = array_merge( $formValues, array('captcha' => $captcha)  );
-            }
-            //binding request form parameters with form
-            $this->form->bind($formValues);
-            if ($this->form->isValid())
-            {
-              $guid = "n" . self::createGuid();
-              $this->form->setValidate($guid);
-              $this->form->save();
-              $confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' );
-              if( $confirmation['apply'] )
-              {
-                try
-                {
-                  //Extracting object and sending creating verification mail
-                  $profile = $this->form->getObject();
-                  $this->sendVerificationMail($profile);
-                  return 'After';
-                }
-                catch (Exception $e)
-                {
-                  //Cleaning after possible exception thrown in ::sendVerificationMail() method
-                  $profile = $this->form->getObject();
-                  $user = $profile->getUser();
-                  $user->delete();
-                  // You could re-throw $e here if you want to
-                  // make it available for debugging purposes
-                  return 'MailerError';
-                }
-              }
-              else
-              {
-                $this->activateUser( $this->form->getObject()->getUser() );
-                return $this->redirect( '@homepage' );
-              }
-            }
+          $captcha = array(
+            'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),
+            'recaptcha_response_field'  => $request->getParameter('recaptcha_response_field'),
+          );
+          //Adding captcha to form array
+          $formValues = array_merge( $formValues, array('captcha' => $captcha)  );
         }
+          //binding request form parameters with form
+        $this->form->bind($formValues);
+        if ($this->form->isValid())
+        {
+          $guid = "n" . self::createGuid();
+          $this->form->setValidate($guid);
+          $this->form->save();
+          $confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' );
+          if( $confirmation['apply'] )
+          {
+            try
+            {
+              //Extracting object and sending creating verification mail
+              $profile = $this->form->getObject();
+              $this->sendVerificationMail($profile);
+              return 'After';
+            }
+            catch (Exception $e)
+            {
+              //Cleaning after possible exception thrown in ::sendVerificationMail() method
+              $profile = $this->form->getObject();
+              $user = $profile->getUser();
+              $user->delete();
+              //We rethrow exception for the dev environment. This catch
+              //catches other than mailer exception, i18n as well. So developer
+              //now knows what he's up to.
+              if( sfContext::getInstance()->getConfiguration()->getEnvironment() === 'dev' )
+              {
+                throw $e;
+              }
+              return 'MailerError';
+            }
+          }
+          else
+          {
+            $this->activateUser( $this->form->getObject()->getUser() );
+            return $this->redirect( '@homepage' );
+          }
+        }
+      }
     }
 
     //Processes reset requests
@@ -230,8 +235,8 @@ class sfApplyActionsLibrary extends sfActions
 
     public function executeResetCancel()
     {
-        $this->getUser()->setAttribute('sfApplyReset', null);
-        return $this->redirect(sfConfig::get('app_sfApplyPlugin_after', '@homepage'));
+      $this->getUser()->setAttribute('sfApplyReset', null);
+      return $this->redirect(sfConfig::get('app_sfApplyPlugin_after', '@homepage'));
     }
 
     public function executeSettings(sfRequest $request)
@@ -321,13 +326,13 @@ class sfApplyActionsLibrary extends sfActions
      */
     protected function getFromAddress()
     {
-        $from = sfConfig::get('app_sfApplyPlugin_from', false);
-        if (!$from)
-        {
-            throw new Exception('app_sfApplyPlugin_from is not set');
-        }
-        // i18n the full name
-        return array('email' => $from['email'], 'fullname' => sfContext::getInstance()->getI18N()->__($from['fullname']));
+      $from = sfConfig::get('app_sfApplyPlugin_from', false);
+      if (!$from)
+      {
+        throw new Exception('app_sfApplyPlugin_from is not set');
+      }
+      // i18n the full name
+      return array('email' => $from['email'], 'fullname' => sfContext::getInstance()->getI18N()->__($from['fullname']));
     }
 
     /**
@@ -337,15 +342,15 @@ class sfApplyActionsLibrary extends sfActions
      */
     protected function sendVerificationMail( $profile )
     {
-        $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
-            sfContext::getInstance()->getI18N()->__("Please verify your account on %1%",
-                                                    array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
-            'fullname' => $profile->getFullname(),
-            'email' => $profile->getEmail(),
-            'parameters' => array('fullname' => $profile->getFullname(),
-                                    'validate' => $profile->getValidate()),
-            'text' => 'sfApply/sendValidateNewText',
-            'html' => 'sfApply/sendValidateNew'));
+      $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
+          sfContext::getInstance()->getI18N()->__("Please verify your account on %1%",
+                                                  array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
+          'fullname' => $profile->getFullname(),
+          'email' => $profile->getEmail(),
+          'parameters' => array('fullname' => $profile->getFullname(),
+                                  'validate' => $profile->getValidate()),
+          'text' => 'sfApply/sendValidateNewText',
+          'html' => 'sfApply/sendValidateNew'));
     }
 
     /**
@@ -355,29 +360,29 @@ class sfApplyActionsLibrary extends sfActions
      */
     protected function mail( $options )
     {
-        //Checking for all required options
-        $required = array('subject', 'parameters', 'email', 'fullname', 'html', 'text');
-        foreach ($required as $option)
+      //Checking for all required options
+      $required = array('subject', 'parameters', 'email', 'fullname', 'html', 'text');
+      foreach ($required as $option)
+      {
+        if (!isset($options[$option]))
         {
-            if (!isset($options[$option]))
-            {
-                throw new sfException("Required option $option not supplied to sfApply::mail");
-            }
+          throw new sfException("Required option $option not supplied to sfApply::mail");
         }
-        $message = $this->getMailer()->compose();
-        $message->setSubject($options['subject']);
+      }
+      $message = $this->getMailer()->compose();
+      $message->setSubject($options['subject']);
 
-        // Render message parts
-        $message->setBody($this->getPartial($options['html'], $options['parameters']), 'text/html');
-        $message->addPart($this->getPartial($options['text'], $options['parameters']), 'text/plain');
+      // Render message parts
+      $message->setBody($this->getPartial($options['html'], $options['parameters']), 'text/html');
+      $message->addPart($this->getPartial($options['text'], $options['parameters']), 'text/plain');
 
-        //getting information on sender (that's us). May be source of exception.
-        $address = $this->getFromAddress();
-        $message->setFrom(array($address['email'] => $address['fullname']));
-        $message->setTo(array($options['email'] => $options['fullname']));
+      //getting information on sender (that's us). May be source of exception.
+      $address = $this->getFromAddress();
+      $message->setFrom(array($address['email'] => $address['fullname']));
+      $message->setTo(array($options['email'] => $options['fullname']));
 
-        //Sending email
-        $this->getMailer()->send($message);
+      //Sending email
+      $this->getMailer()->send($message);
     }
 
     // A convenience method to instantiate a form of the
@@ -385,13 +390,13 @@ class sfApplyActionsLibrary extends sfActions
     // replacement class in app.yml. Sweet, no?
     protected function newForm($className, $object = null)
     {
-        $key = "app_sfApplyPlugin_$className" . "_class";
-        $class = sfConfig::get($key, $className);
-        if ($object !== null)
-        {
-            return new $class($object);
-        }
-        return new $class;
+      $key = "app_sfApplyPlugin_$className" . "_class";
+      $class = sfConfig::get($key, $className);
+      if ($object !== null)
+      {
+        return new $class($object);
+      }
+      return new $class;
     }
 
     /**
@@ -408,19 +413,19 @@ class sfApplyActionsLibrary extends sfActions
     
     static public function createGuid()
     {
-        $guid = "";
-        // This was 16 before, which produced a string twice as
-        // long as desired. I could change the schema instead
-        // to accommodate a validation code twice as big, but
-        // that is completely unnecessary and would break
-        // the code of anyone upgrading from the 1.0 version.
-        // Ridiculously unpasteable validation URLs are a
-        // pet peeve of mine anyway.
-        for ($i = 0; ($i < 16); $i++)
-        {
-            $guid .= sprintf("%02x", mt_rand(0, 255));
-        }
-        return $guid;
+      $guid = "";
+      // This was 16 before, which produced a string twice as
+      // long as desired. I could change the schema instead
+      // to accommodate a validation code twice as big, but
+      // that is completely unnecessary and would break
+      // the code of anyone upgrading from the 1.0 version.
+      // Ridiculously unpasteable validation URLs are a
+      // pet peeve of mine anyway.
+      for ($i = 0; ($i < 16); $i++)
+      {
+        $guid .= sprintf("%02x", mt_rand(0, 255));
+      }
+      return $guid;
     }
 
     //Returns validation type
@@ -459,15 +464,22 @@ class sfApplyActionsLibrary extends sfActions
             $type = $this->getValidationType($profile->getValidate());
             if ($type === 'New')
             {
-                try
+              try
+              {
+                $this->sendVerificationMail($profile);
+              }
+              catch (Exception $e)
+              {
+                //We rethrow exception for the dev environment. This catch
+                //catches other than mailer exception, i18n as well. So developer
+                //now knows what he's up to.
+                if( sfContext::getInstance()->getConfiguration()->getEnvironment() === 'dev' )
                 {
-                    $this->sendVerificationMail($profile);
+                  throw $e;
                 }
-                catch (Exception $e)
-                {
-                    return 'UnverifiedMailerError';
-                }
-                return 'Unverified';
+                return 'UnverifiedMailerError';
+              }
+              return 'Unverified';
             }
             elseif ($type === 'Reset')
             {
@@ -482,20 +494,27 @@ class sfApplyActionsLibrary extends sfActions
         $profile->save();
         try
         {
-            $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_reset_subject',
-                    sfContext::getInstance()->getI18N()
-                    ->__("Please verify your password reset request on %1%",
-                    array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
-                'fullname' => $profile->getFullname(),
-                'email' => $profile->getEmail(),
-                'parameters' => array('fullname' => $profile->getFullname(),
-                                        'validate' => $profile->getValidate(), 'username' => $user->getUsername()),
-                'text' => 'sfApply/sendValidateResetText',
-                'html' => 'sfApply/sendValidateReset'));
+          $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_reset_subject',
+                  sfContext::getInstance()->getI18N()
+                  ->__("Please verify your password reset request on %1%",
+                  array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
+              'fullname' => $profile->getFullname(),
+              'email' => $profile->getEmail(),
+              'parameters' => array('fullname' => $profile->getFullname(),
+                                      'validate' => $profile->getValidate(), 'username' => $user->getUsername()),
+              'text' => 'sfApply/sendValidateResetText',
+              'html' => 'sfApply/sendValidateReset'));
         }
         catch (Exception $e)
         {
-            return 'MailerError';
+          //We rethrow exception for the dev environment. This catch
+          //catches other than mailer exception, i18n as well. So developer
+          //now knows what he's up to.
+          if( sfContext::getInstance()->getConfiguration()->getEnvironment() === 'dev' )
+          {
+            throw $e;
+          }
+          return 'MailerError';
         }
         return 'After';
     }
