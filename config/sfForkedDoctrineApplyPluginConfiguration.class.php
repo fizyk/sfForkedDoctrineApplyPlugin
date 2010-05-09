@@ -1,6 +1,6 @@
 <?php
 /**
- * fzTagPlugin configuration class. Adds listener for the form.post_configure event
+ * sfForkedDoctrineApply configuration class. Adds listener for the form.post_configure event
  * @author: Grzegorz Śliwinski
  */
 class sfForkedDoctrineApplyPluginConfiguration extends sfPluginConfiguration
