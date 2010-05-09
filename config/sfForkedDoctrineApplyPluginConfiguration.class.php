@@ -24,23 +24,24 @@ class sfForkedDoctrineApplyPluginConfiguration extends sfPluginConfiguration
   public function listenToRoutingLoadConfigurationEvent(sfEvent $event)
   {
     $r = $event->getSubject();
+    $routesUri = sfConfig::get( 'app_sfForkedApply_routes' );
     // preprend our route
-    $r->prependRoute('apply', 
-        new sfRoute('/user/new', array('module' => 'sfApply', 'action' => 'apply')));
+    $r->prependRoute('apply',
+        new sfRoute( $routesUri['apply'] , array('module' => 'sfApply', 'action' => 'apply')));
     $r->prependRoute('reset',
-        new sfRoute('/user/password-reset', array('module' => 'sfApply', 'action' => 'reset')));
+        new sfRoute( $routesUri['reset'], array('module' => 'sfApply', 'action' => 'reset')));
     $r->prependRoute('resetRequest',
-        new sfRoute('/user/reset-request', array('module' => 'sfApply', 'action' => 'resetRequest')));
+        new sfRoute($routesUri['resetRequest'], array('module' => 'sfApply', 'action' => 'resetRequest')));
     $r->prependRoute('resetCancel',
-        new sfRoute('/user/reset-cancel', array('module' => 'sfApply', 'action' => 'resetCancel')));
+        new sfRoute($routesUri['resetCancel'], array('module' => 'sfApply', 'action' => 'resetCancel')));
     $r->prependRoute('validate',
-        new sfRoute('/user/confirm/:validate', array('module' => 'sfApply', 'action' => 'confirm')));
+        new sfRoute($routesUri['validate'], array('module' => 'sfApply', 'action' => 'confirm')));
     $r->prependRoute('settings',
-        new sfRoute('/user/settings', array('module' => 'sfApply', 'action' => 'settings')));
+        new sfRoute($routesUri['settings'], array('module' => 'sfApply', 'action' => 'settings')));
     if( sfConfig::get( 'app_sfForkedApply_mail_editable' ))
     {
       $r->prependRoute('editEmail',
-          new sfRoute('/user/settings/email', array('module' => 'sfApply', 'action' => 'editEmail')));
+          new sfRoute( $routesUri['settings'].'/email', array('module' => 'sfApply', 'action' => 'editEmail')));
     }
 
   }
