@@ -15,9 +15,9 @@ class sfValidatorApplyEditMail extends sfValidatorSchema
   public function configure( $options = array(), $messages = array()  )
   {
     parent::configure($options, $messages);
-
+    $this->addOption('primary_key',null);
     $this->addRequiredOption( 'id', null );
-    
+
     $this->setMessage('invalid', 'This email is already in use by some one else');
   }
 
@@ -28,6 +28,7 @@ class sfValidatorApplyEditMail extends sfValidatorSchema
   {
     $originalValues = $value;
 
+    //We're retrieving object if any exists
     $object = Doctrine_Core::getTable('sfGuardUserProfile')->createQuery('a')
         ->where('a.email = ?', $value)
         ->andWhereNotIn( 'a.id', $this->getOption( 'id' ) )->fetchOne();
@@ -38,7 +39,7 @@ class sfValidatorApplyEditMail extends sfValidatorSchema
       return $originalValues;
     }
 
-    $error = new sfValidatorError($this, 'invalid', array('column' => implode(', ', $this->getOption('column'))));
+    $error = new sfValidatorError($this, 'invalid');
 
     if ($this->getOption('throw_global_error'))
     {
@@ -81,7 +82,7 @@ class sfValidatorApplyEditMail extends sfValidatorSchema
   {
     if (null === $this->getOption('primary_key'))
     {
-      $primaryKeys = Doctrine_Core::getTable($this->getOption('model'))->getIdentifier();
+      $primaryKeys = Doctrine_Core::getTable('sfGuardUserProfile')->getIdentifier();
       $this->setOption('primary_key', $primaryKeys);
     }
 
