@@ -19,6 +19,7 @@ class sfApplyComponents extends sfComponents
             $class = sfConfig::get('app_sf_guard_plugin_signin_form',
                     'sfGuardFormSignin');
             $this->form = new $class();
+            $this->form->getWidgetSchema()->setFormFormatterName('list');
         }
     }
 }
