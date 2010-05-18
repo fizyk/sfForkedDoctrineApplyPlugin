@@ -8,7 +8,7 @@
 <?php end_slot() ?>
 <div class="sf_apply sf_apply_apply">
 <h2><?php echo __("Apply for an Account", array(), 'sfForkedApply') ?></h2>
-<form method="POST" action="<?php echo url_for('sfApply/apply') ?>"
+<form method="post" action="<?php echo url_for('sfApply/apply') ?>"
   name="sf_apply_apply_form" id="sf_apply_apply_form">
 <ul>
 <?php echo $form ?>

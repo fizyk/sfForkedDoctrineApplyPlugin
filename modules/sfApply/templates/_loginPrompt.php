@@ -1,7 +1,11 @@
 <?php use_helper('I18N') ?>
-<form method="POST" action="<?php echo url_for("@sf_guard_signin") ?>" name="sf_guard_signin" id="sf_guard_signin" class="sf_apply_signin_inline">
-  <?php echo $form ?>
-  <input type="submit" value="<?php echo __('sign in', array(), 'sfForkedApply') ?>" />
+<form method="post" action="<?php echo url_for("@sf_guard_signin") ?>" name="sf_guard_signin" id="sf_guard_signin" class="sf_apply_signin_inline">
+  <ul>
+    <?php echo $form ?>
+    <li>
+      <input type="submit" value="<?php echo __('sign in', array(), 'sfForkedApply') ?>" />
+    </li>
+  </ul>
   <p>
   <?php echo link_to(__('Reset Your Password',array(),'sfForkedApply'), 'sfApply/resetRequest')  ?>
   </p>

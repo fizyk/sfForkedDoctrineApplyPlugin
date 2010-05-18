@@ -4,7 +4,7 @@
 <?php use_helper("I18N") ?>
 <div class="sf_apply sf_apply_settings">
 <h2><?php echo __("Account Settings", array(), 'sfForkedApply') ?></h2>
-<form method="POST" action="<?php echo url_for("sfApply/settings") ?>" name="sf_apply_settings_form" id="sf_apply_settings_form">
+<form method="post" action="<?php echo url_for("sfApply/settings") ?>" name="sf_apply_settings_form" id="sf_apply_settings_form">
 <ul>
 <?php echo $form ?>
 <li class="submit_row">
