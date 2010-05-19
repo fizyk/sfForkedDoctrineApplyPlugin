@@ -4,7 +4,7 @@ sfGuardUserProfileBasis:
   tableName: sf_guard_user_profile
   columns:
     user_id:
-      type: integer(8)
+      type: integer(4)
       notnull: true
     email:
       type: string(80)
