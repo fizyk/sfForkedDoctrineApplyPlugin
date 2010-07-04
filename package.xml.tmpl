@@ -53,6 +53,22 @@ This Fork got stripped stripped of all dependencies from Zend Framework, introdu
   <changelog>
       <release>
         <version>
+          <release>1.2.1</release>
+          <api>1.0.0</api>
+        </version>
+        <stability>
+         <release>stable</release>
+         <api>stable</api>
+        </stability>
+        <license uri="http://www.symfony-project.org/license">MIT license</license>
+        <date>2010-07-0x</date>
+        <license>MIT</license>
+        <notes>
+            * Pierre Grandin: French translation
+        </notes>
+      </release>
+      <release>
+        <version>
           <release>1.2.0</release>
           <api>1.0.0</api>
         </version>
@@ -107,84 +123,6 @@ This Fork got stripped stripped of all dependencies from Zend Framework, introdu
             * fizyk: reorgainised i18n strings and adjusted polish translation
             * fizyk: added recaptcha functionality to Apply and ResetRequests forms (based on vjCommentPlugin)
             * fizyk: changed type of validate_at to timestamp from datetime. No change on generated sql (reported by Magician).
-        </notes>
-      </release>
-      <release>
-        <version>
-          <release>1.0.2</release>
-          <api>1.0.0</api>
-        </version>
-        <stability>
-         <release>stable</release>
-         <api>stable</api>
-        </stability>
-        <license uri="http://www.symfony-project.org/license">MIT license</license>
-        <date>2010-03-25</date>
-        <license>MIT</license>
-        <notes>
-            * Alessandro Rossi: Italian translation
-            * fizyk: removed string i18n pl: 46th (duplicate of 45th, reported by Alessandro Rossi)
-            * fizyk: removed minimum length requirements for name and lastname validators, they are required, so they have at least 1 character.
-            * fizyk: fixed 39th i18n strings it and pl
-        </notes>
-      </release>
-      <release>
-        <version>
-          <release>1.0.1</release>
-          <api>1.0.0</api>
-        </version>
-        <stability>
-         <release>stable</release>
-         <api>stable</api>
-        </stability>
-        <license uri="http://www.symfony-project.org/license">MIT license</license>
-        <date>2010-03-23</date>
-        <license>MIT</license>
-        <notes>
-            * fizyk: removed leftover require from sfApplyComponents
-            * fizyk: fixed typo in 13th i18n pl string.
-            * fizyk: added i18n pl strings: 55, 56, 57.
-            * fizyk: added new reset action template for logged in users.
-            * fizyk: moved all sfApply actions to the sfApplyActionsLibrary class, to allow override of actions. It wasn't possible before, as symfony would generate HTTP 404 response for all non overriden actions before.
-        </notes>
-      </release>
-      <release>
-        <version>
-          <release>1.0.0</release>
-          <api>1.0.0</api>
-        </version>
-        <stability>
-         <release>stable</release>
-         <api>stable</api>
-        </stability>
-        <license uri="http://www.symfony-project.org/license">MIT license</license>
-        <date>2010-03-18</date>
-        <license>MIT</license>
-        <notes>
-            * fizyk: fixed issue when logged user trying to reset his password was presented with 404 web site (reported by tnaseem).
-            * fizyk: removed all PHP's heredoc's &lt;&lt;&lt;EOM and replaced these with ordinary string, as they apparently didn't played well with i18n and didn't get relpaced by translated strings.
-        </notes>
-      </release>
-      <release>
-        <version>
-          <release>0.9.0</release>
-          <api>0.9.0</api>
-        </version>
-        <stability>
-         <release>beta</release>
-         <api>beta</api>
-        </stability>
-        <license uri="http://www.symfony-project.org/license">MIT license</license>
-        <date>2010-03-15</date>
-        <license>MIT</license>
-        <notes>
-            * stephenrs: Removed all Zend_Mail references and got back to SwiftMailer
-            * fizyk: Introduced simple inheritance for profile model.
-            * fizyk: Logged user won't get confirmation email when accidentally requesting password change.
-            * fizyk: Visitor can't get access to reset password page if not logged in, or haven't came through confirmation page.
-            * fizyk: Doubled the original confirmation string.
-            * fizyk: Moved action library class into appropriate folder
-            * fizyk: Added i18n pl strings
         </notes>
       </release>
   </changelog>

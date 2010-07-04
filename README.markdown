@@ -236,5 +236,6 @@ You can contact him at [fizyk@fizyk.net.pl](mailto:fizyk@fizyk.net.pl) or throug
 jabber/xmpp at fizyk@jabbim.pl and follow his adventures on his [homepage](http://www.fizyk.net.pl/).
 
 ###Translations###
+* French - Pierre Grandin
 * Italian - Alessandro Rossi
 * Polish - Grzegorz Śliwiński
