@@ -1,4 +1,3 @@
-
 sfGuardUserProfileBasis:
   actAs:
     Timestampable: ~

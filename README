@@ -88,35 +88,7 @@ All you need to do is to enable sfApply module in your settings.yml file:
         #...#
         enabled_modules: [default, ... , sfGuardAuth, sfApply]
 
-and set up routes for your app:
-
-**apps/APPLICATION/config/routing.yml**
-
-    apply:
-      url:  /user/new
-      param: { module: sfApply, action: apply }
-
-    reset:
-      url: /user/password-reset
-      param: { module: sfApply, action: reset }
-
-    resetRequest:
-      url: /user/reset-request
-      param: { module: sfApply, action: resetRequest }
-
-    resetCancel:
-      url: /user/reset-cancel
-      param: { module: sfApply, action: resetCancel }
-
-    validate:
-      url: /user/confirm/:validate
-      param: { module: sfApply, action: confirm }
-
-    settings:
-      url: /user/settings
-      param: { module: sfApply, action: settings }
-
-And you can enjoy user registration on your website.
+Doing this will also autmatically add necessary routes to your app
 
 ##Configuration##
 
@@ -145,6 +117,21 @@ from is fully internationalised (You might have to prepare i18n files for your l
       .settings:
         i18n: on
 
+You can modify URL's for the sfApply module's action. To do that, simply add this options to your app.yml file:
+
+        all:
+          #...
+          sfForkedApply:
+            #...
+            routes:
+              apply: /user/new
+              reset: /user/password-reset
+              resetRequest: /user/reset-request
+              resetCancel: /user/reset-cancel
+              validate: /user/confirm/:validate
+              settings: /user/settings
+
+Each key's value represents route's url, you can change them as you want.
 
 ###CAPTCHA###
 
@@ -187,13 +174,7 @@ To allow users to edit their emails, you've got to add app_sfForkedApply_mail_ed
         #...
         mail_editable: false
 
-And then add route to your apps routning.yml file:
-
-    editEmail:
-      url: /user/settings/email
-      param: { module: sfApply, action: editEmail }
-
-Now, when user will try to edit their email, he'll receive confirmation email on his old address.
+Now, when user will try to edit their email, he'll receive confirmation email on his old address. editMail action will also get route generated which will be composed from settings URL to which "/email" end will be added.
 
 ###Confirmation disabling###
 
@@ -255,5 +236,6 @@ You can contact him at [fizyk@fizyk.net.pl](mailto:fizyk@fizyk.net.pl) or throug
 jabber/xmpp at fizyk@jabbim.pl and follow his adventures on his [homepage](http://www.fizyk.net.pl/).
 
 ###Translations###
+* French - Pierre Grandin
 * Italian - Alessandro Rossi
 * Polish - Grzegorz Śliwiński

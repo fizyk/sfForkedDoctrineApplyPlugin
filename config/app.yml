@@ -13,3 +13,10 @@ all:
       reset: true
       apply: true
       email: true
+    routes:
+      apply: /user/new
+      reset: /user/password-reset
+      resetRequest: /user/reset-request
+      resetCancel: /user/reset-cancel
+      validate: /user/confirm/:validate
+      settings: /user/settings
