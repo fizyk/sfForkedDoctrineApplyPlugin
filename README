@@ -51,26 +51,7 @@ config/ProjectConfiguration.class.php
         }
     }
 
-After installing this plugin, add this declaration into your schema.yml file:
-**config/doctrine/schema.yml**
-
-    sfGuardUserProfile:
-      inheritance:
-        type: simple
-        extends: sfGuardUserProfileBasis
-      # Don't forget this!
-      relations:
-        User:
-          class: sfGuardUser
-          foreign: id
-          local: user_id
-          type: one
-          onDelete: cascade
-          foreignType: one
-          foreignAlias: Profile
-
-You can add your own columns, if needed, it just won't be possible to set these
-as not null in database. Build your model after those steps, or create migrations:
+After that create migrations:
 
     ./symfony doctrine:generate-migrations-diff
 
@@ -79,7 +60,7 @@ Review your migration files after this step, and run:
     ./symfony doctrine:migrate
     ./symfony doctrine:build --all-classes
 
-All you need to do is to enable sfApply module in your settings.yml file:
+All you need to do now is to enable sfApply module in your settings.yml file:
 
 **apps/APPLICATION/config/settings.yml**
 
@@ -88,7 +69,39 @@ All you need to do is to enable sfApply module in your settings.yml file:
         #...#
         enabled_modules: [default, ... , sfGuardAuth, sfApply]
 
-Doing this will also autmatically add necessary routes to your app
+Doing this will also automatically add necessary routes to your app
+
+That's pretty much all you have to do. If you're not satisfied with the model
+provided, you can extend it using e.g column_aggregation inheritance:
+
+**config/doctrine/schema.yml**
+
+    MyProfile:
+      inheritance:
+        type: column_aggregation
+        extends: sfGuardUserProfile
+
+You can add your own columns, relations, behaviours or even model names if needed.
+You can have even different profile types.
+
+##Upgrade##
+
+If you're upgrading from release earlier than 1.3.0, remember to create migrations:
+
+    ./symfony doctrine:generate-migrations-diff
+
+Review your migration files after this step. It'll probably try to drop and
+recreate sf_guard_profile table, you can remove those two operations from up()
+method and down() as well. After that migrate your database, build your model classes
+again:
+
+    ./symfony doctrine:migrate
+    ./symfony doctrine:build --all-classes
+    ./symfony doctrine:clean-model-files
+
+You'll have left sfGuardUserProfileBasis* model, filter and form files inside your project's
+lib/filter/doctrine, lib/form/doctrine and lib/model/doctrine. Remove them as
+these classes extends ones that no longer exists.
 
 ##Configuration##
 
@@ -103,9 +116,9 @@ In order to send emails with confirmation codes you've got to add these settings
 **apps/APPLICATION/config/app.yml**
 
     sfApplyPlugin:
-            from:
-              email: "your@emailaddress.com"
-              fullname: "the staff at yoursite.com"
+      from:
+        email: "your@emailaddress.com"
+        fullname: "the staff at yoursite.com"
 
 
 You should also turn on i18n engine, as this plugin, like the project it rooted
@@ -146,11 +159,13 @@ Starting from 1.1.0 version, sfForkedDoctrineApplyPlugin integrates reCaptcha. T
         public_key:     YOUR_PUBLIC_reCAPTCHA_KEY
         private_key:    YOUR_PRIVATE_reCAPTCHA_KEY
 
-enabled property is for enabling and disabling captcha. After setting this, reCaptcha will appear on apply and reset request pages.
+enabled property is for enabling and disabling captcha. After setting this,
+reCaptcha will appear on apply and reset request pages.
 
 ###Custom forms###
 
-Since version 1.1.1, it is possible to define own, custom forms for apply action, however all custom forms must extend the Apply ones. To use custom forms, you need to define them in your app.yml file:
+It's possible to define custom forms, however all custom forms must extend the
+Apply ones. To use custom forms, you need to define them in your app.yml file:
 
 **apps/APPLICATION/config/app.yml**
 
