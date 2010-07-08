@@ -7,49 +7,59 @@
 class sfValidatorApplyEditMail extends sfValidatorSchema
 {
 
-  public function __construct($options = array(), $messages = array())
-  {
-    parent::__construct(null, $options, $messages);
-  }
-
-  public function configure( $options = array(), $messages = array()  )
-  {
-    parent::configure($options, $messages);
-    $this->addOption('primary_key',null);
-    $this->addRequiredOption( 'id', null );
-
-    $this->setMessage('invalid', 'This email is already in use by some one else');
-  }
-
-  /**
-   * @see sfValidatorBase
-   */
-  protected function doClean($value)
-  {
-    $originalValues = $value;
-
-    //We're retrieving object if any exists
-    $object = Doctrine_Core::getTable('sfGuardUserProfile')->createQuery('a')
-        ->where('a.email = ?', $value)
-        ->andWhereNotIn( 'a.id', $this->getOption( 'id' ) )->fetchOne();
-
-    // if no object or if we're updating the object, it's ok
-    if (!$object || $this->isUpdate($object, $value))
+    public function __construct($options = array(), $messages = array())
     {
-      return $originalValues;
+        parent::__construct(null, $options, $messages);
     }
 
-    $error = new sfValidatorError($this, 'invalid');
-
-    if ($this->getOption('throw_global_error'))
+    public function configure( $options = array(), $messages = array()  )
     {
-      throw $error;
+        parent::configure($options, $messages);
+        $this->addOption('primary_key',null);
+        $this->addRequiredOption( 'id', null );
+
+        $this->setMessage('invalid', 'This email is already in use by some one else');
+        $this->addMessage('actuall', 'This email is already used by you');
     }
 
-    $columns = $this->getOption('column');
+    /**
+    * @see sfValidatorBase
+    */
+    protected function doClean($value)
+    {
+        $originalValues = $value;
 
-    throw new sfValidatorErrorSchema($this, array($columns[0] => $error));
-  }
+        //We're retrieving object if any exists
+        $object = Doctrine_Core::getTable('sfGuardUserProfile')->createQuery('a')
+                ->select( 'a.email, a.id' )
+                ->where('a.email = ?', $value)->fetchOne();
+
+        // if no object or if we're updating the object, it's ok
+        if (!$object || $this->isUpdate($object, $value))
+        {
+            return $originalValues;
+        }
+        //if email is same, inform instead of updating
+        elseif( $object->getId() === $this->getOption( 'id' ) )
+        {
+            $error = new sfValidatorError($this, 'actuall');
+        }
+        //if email is anywhere in db
+        else
+        {
+            $error = new sfValidatorError($this, 'invalid');
+        }
+
+
+        if ($this->getOption('throw_global_error'))
+        {
+            throw $error;
+        }
+
+        $columns = $this->getOption('column');
+
+        throw new sfValidatorErrorSchema($this, array($columns[0] => $error));
+    }
 
   /**
    * Returns whether the object is being updated.

@@ -104,6 +104,14 @@
         <source>sign in</source>
         <target>Zaloguj się</target>
       </trans-unit>
+      <trans-unit id="26" approved="yes">
+        <source>This email is already used by you</source>
+        <target>Ten adres email jest już używany przez ciebie</target>
+      </trans-unit>
+      <trans-unit id="27" approved="yes">
+        <source>This email is already in use by some one else</source>
+        <target>Ten adres email jest już przez kogoś używany</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
