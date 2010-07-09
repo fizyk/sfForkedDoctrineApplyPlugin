@@ -38,7 +38,9 @@ class sfApplyActionsLibrary extends sfActions
       if ($this->form->isValid())
       {
         $guid = "n" . self::createGuid();
-        $this->form->setValidate($guid);
+        $this->form->getObject()->setValidate( $guid );
+        $date = new DateTime();
+        $profile->setValidateAt( $date->format( 'Y-m-d H:i:s' ) );
         $this->form->save();
         $confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' );
         if( $confirmation['apply'] )
@@ -159,7 +161,9 @@ class sfApplyActionsLibrary extends sfActions
       return 'Invalid';
     }
     $profile = $sfGuardUser->getProfile();
-    $profile->setValidate(null);
+    //clearing validate and validate_at fields
+    $profile->setValidate( null );
+    $profile->setValidateAt( null );
     $profile->save();
     if ($type == 'New')
     {
@@ -288,6 +292,8 @@ class sfApplyActionsLibrary extends sfActions
         {
           $profile->setEmailNew( $this->form->getValue( 'email' ) );
           $profile->setValidate('e' . self::createGuid());
+          $date = new DateTime();
+          $profile->setValidateAt( $date->format( 'Y-m-d H:i:s' ) );
           $profile->save();
           $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
             sfContext::getInstance()->getI18N()->__("Please verify your email on %1%",
@@ -493,7 +499,9 @@ class sfApplyActionsLibrary extends sfActions
         return 'Locked';
       }
     }
-    $profile->setValidate('r' . self::createGuid());
+    $profile->setValidate( 'r' . self::createGuid() );
+    $date = new DateTime();
+    $profile->setValidateAt( $date->format( 'Y-m-d H:i:s' ) );
     $profile->save();
     try
     {
