@@ -8,6 +8,7 @@ class sfForkedDoctrineApplyPluginConfiguration extends sfPluginConfiguration
    
   public function initialize()
   {
+    //We're adding listener for the routing.load_configuration event if there's sfApply.
     if( in_array('sfApply', sfConfig::get('sf_enabled_modules', array())))
     {
       $this->dispatcher->connect('routing.load_configuration', array($this, 'listenToRoutingLoadConfigurationEvent'));
@@ -25,7 +26,7 @@ class sfForkedDoctrineApplyPluginConfiguration extends sfPluginConfiguration
   {
     $r = $event->getSubject();
     $routesUri = sfConfig::get( 'app_sfForkedApply_routes' );
-    // preprend our route
+    // preprend our routes to routing
     $r->prependRoute('apply',
         new sfRoute( $routesUri['apply'] , array('module' => 'sfApply', 'action' => 'apply')));
     $r->prependRoute('reset',
@@ -38,6 +39,7 @@ class sfForkedDoctrineApplyPluginConfiguration extends sfPluginConfiguration
         new sfRoute($routesUri['validate'], array('module' => 'sfApply', 'action' => 'confirm')));
     $r->prependRoute('settings',
         new sfRoute($routesUri['settings'], array('module' => 'sfApply', 'action' => 'settings')));
+    //we're adding email route, if defined
     if( sfConfig::get( 'app_sfForkedApply_mail_editable' ))
     {
       $r->prependRoute('editEmail',
