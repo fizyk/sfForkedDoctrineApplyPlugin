@@ -12,7 +12,7 @@ class sfApplyActionsLibrary extends sfActions
   public function executeApply(sfRequest $request)
   {
     // we're getting default or customized applyForm for the task
-    if( !( ($this->form = $this->newForm( 'applyForm' ) ) instanceof sfApplyApplyForm) )
+    if( !( ($this->form = $this->newForm( 'applyForm' ) ) instanceof sfGuardUserProfileForm) )
     {
       // if the form isn't instance of sfApplyApplyForm, we don't accept it
       throw new InvalidArgumentException(
@@ -247,7 +247,7 @@ class sfApplyActionsLibrary extends sfActions
 
     $profile = $this->getUser()->getProfile();
     // we're getting default or customized settingsForm for the task
-    if( !( ($this->form = $this->newForm( 'settingsForm', $profile) ) instanceof sfApplySettingsForm) )
+    if( !( ($this->form = $this->newForm( 'settingsForm', $profile) ) instanceof sfGuardUserProfileForm) )
     {
       // if the form isn't instance of sfApplySettingsForm, we don't accept it
       throw new InvalidArgumentException( sfContext::getInstance()->
