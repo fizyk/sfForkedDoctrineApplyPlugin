@@ -146,6 +146,15 @@ You can modify URL's for the sfApply module's action. To do that, simply add thi
 
 Each key's value represents route's url, you can change them as you want.
 
+###sfForkedDoctrineApply:clear-validation-codes task###
+
+Now sfForkedDoctrineApply makes use of the initialy created validate_at field,
+allowing you to expire validate codes. To remove all codes older than a required time just run:
+
+    ./symfony sfForkedDoctrineApply:clear-validation-codes --d="number_of_days"
+
+You can ommit the --d parameter, to leave the default value of 1 day.
+
 ###CAPTCHA###
 
 Starting from 1.1.0 version, sfForkedDoctrineApplyPlugin integrates reCaptcha. To use it, you have to install [sfFormExtraPlugin](http://www.symfony-project.org/plugins/sfFormExtraPlugin) to get access to [reCaptcha](http://recaptcha.net/) widget and validator. Second step is to be conducted in your app.yml file, and add these:
