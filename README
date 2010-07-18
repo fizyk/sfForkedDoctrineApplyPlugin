@@ -82,7 +82,16 @@ provided, you can extend it using e.g column_aggregation inheritance:
         extends: sfGuardUserProfile
 
 You can add your own columns, relations, behaviours or even model names if needed.
-You can have even different profile types.
+With doctrine inheritance you can have different profile types.
+
+You can also add your own columns or redeclare to the provided model instead of using aggregation:
+
+**config/doctrine/schema.yml**
+
+    sfGuardUserProfile:
+      columns:
+        my_column: { type: int }
+        #...
 
 ##Upgrade##
 
@@ -101,7 +110,13 @@ again:
 
 You'll have left sfGuardUserProfileBasis* model, filter and form files inside your project's
 lib/filter/doctrine, lib/form/doctrine and lib/model/doctrine. Remove them as
-these classes extends ones that no longer exists.
+these classes extends ones that no longer exists within plugin.
+
+IMPORTANT: Since there are no longer any Basis files, you have to move any logic
+that you kept in those files to sfGuardUserProfile models, forms and filters.
+
+You can extend profile either with doctrine inheritance or just by merging your
+profile definition with sfForked's one (just define what you need
 
 ##Configuration##
 
