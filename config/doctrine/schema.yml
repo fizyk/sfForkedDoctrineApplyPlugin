@@ -17,7 +17,6 @@ sfGuardUserProfile:
       type: string(30)
     lastname:
       type: string(70)
-    #TODO! Should be used by task that will erase all validate fields created x days ago and not used.
     validate_at:
       type: timestamp
     validate:
@@ -31,3 +30,7 @@ sfGuardUserProfile:
       onDelete: cascade
       foreignType: one
       foreignAlias: Profile
+  indexes:
+    user_id_unique:
+      fields: [user_id]
+      type: unique
