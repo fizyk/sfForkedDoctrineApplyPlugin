@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="EN" target-language="it" datatype="plaintext" original="sfForkedApply" date="2010-03-16T21:58:27Z" product-name="sfForkedApply">
+  <file source-language="EN" target-language="fr" datatype="plaintext" original="sfForkedApply" date="2010-03-16T21:58:27Z" product-name="sfForkedApply">
     <header/>
     <body>
       <trans-unit id="1" approved="yes">
@@ -212,6 +212,7 @@ your "spam" or "bulk" folder.</source>
 email de confirmation. Si vous ne trouvez pas
 ce message, pensez à vérifier vos dossiers 'Spam' ou 'Indésirables'.
 </target>
+      </trans-unit>
       <trans-unit id="24" approved="yes">
         <source>Sorry, there is no user with that username or email address.</source>
         <target>Désolé, nous n'avons pas de compte avec cet identifiant ou cette adresse email.</target>
@@ -259,7 +260,7 @@ Votre mot de passe ne sera pas changé, à moins que vous ne cliquiez sur le lie
       </trans-unit>
       <trans-unit id="27" approved="yes">
         <source>Thank you for confirming your account! You are now logged into the site.</source>
-        <target>Merci d'avoir confirmé votre compte! Vous êtes maintenant connecté sur le site.</source>
+        <target>Merci d'avoir confirmé votre compte! Vous êtes maintenant connecté sur le site.</target>
       </trans-unit>
       <trans-unit id="28" approved="yes">
         <source>&lt;p&gt;
@@ -271,7 +272,7 @@ Ce compte est désactivé. Merci de contacter un administrateur.
       </trans-unit>
       <trans-unit id="29" approved="yes">
         <source>Logged in as %1%</source>
-        <target>Connecté en tant que %1%</source>
+        <target>Connecté en tant que %1%</target>
       </trans-unit>
       <trans-unit id="30" approved="yes">
         <source>Log Out</source>

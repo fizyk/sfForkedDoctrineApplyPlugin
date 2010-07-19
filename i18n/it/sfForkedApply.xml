@@ -210,6 +210,7 @@ your "spam" or "bulk" folder.</source>
 riceverai un'email di conferma. Se non la vedi controlla la cartella
 "spam" o "bulk".
 </target>
+      </trans-unit>
       <trans-unit id="24" approved="yes">
         <source>Sorry, there is no user with that username or email address.</source>
         <target>Scusa, non esiste alcun utente con questo username o indirizzo email.</target>
