@@ -82,13 +82,19 @@ class sfApplyActionsLibrary extends sfActions
   {
     $user = $this->getUser();
 
-    if ($user->isAuthenticated())
+    $confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' );
+    //if user is authenticated and confirmation for reset for logged users is disabled
+    if( $user->isAuthenticated() && !$confirmation['reset_logged'] )
     {
       $this->redirect( 'sfApply/reset' );
     }
+    //if user is authenticated and confirmation for reset for logged users is enabled
+    elseif( $user->isAuthenticated() && $confirmation['reset_logged'] )
+    {
+      return $this->resetRequestBody( $this->getUser()->getGuardUser() );
+    }
     else
     {
-      $confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' );
       $this->forward404Unless( $confirmation['reset'] );
       // we're getting default or customized resetRequestForm for the task
       if( !( ($this->form = $this->newForm( 'resetRequestForm'  ) )  instanceof sfApplyResetRequestForm) )

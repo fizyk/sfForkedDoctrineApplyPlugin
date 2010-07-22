@@ -193,9 +193,8 @@ Un errore è avvenuto durante l'invio della mail. Prego ritentare fra poco.
         <target>Salva</target>
       </trans-unit>
       <trans-unit id="21" approved="yes">
-        <source>Click the button below to change your password. For security reasons, you
-will receive a confirmation email containing a link allowing you to complete the password change.</source>
-        <target>Clicca il pulsante in basso per cambiare la tua password. Per motivi di sicurezza, riceverai una mail di conferma contenente un link che ti permettera' di completare il cambio della password.</target>
+        <source>Click the button below to change your password.</source>
+        <target>Clicca il pulsante in basso per cambiare la tua password.</target>
       </trans-unit>
       <trans-unit id="22" approved="yes">
         <source>Reset Password</source>
@@ -296,6 +295,11 @@ Questo account è inattivo. Prego, contattare l'amministratore.
       <trans-unit id="36" approved="yes">
         <source>Unable to check the captcha from the server (%error%).</source>
         <target>Non possiamo verificare il captcha dal server (%error%).</target>
+      </trans-unit>
+      <trans-unit id="43" approved="yes">
+        <source>For security reasons, you
+will receive a confirmation email containing a link allowing you to complete the password change.</source>
+        <target>Per motivi di sicurezza, riceverai una mail di conferma contenente un link che ti permettera' di completare il cambio della password.</target>
       </trans-unit>
     </body>
   </file>
