@@ -193,11 +193,8 @@ rééessayer plus tard
         <target>Enregistrer</target>
       </trans-unit>
       <trans-unit id="21" approved="yes">
-        <source>Click the button below to change your password. For security reasons, you
-will receive a confirmation email containing a link allowing you to complete the password change.</source>
-        <target>Cliquez sur le bouton ci-dessous pour changer votre mot de passe. Pour des raisons
-	de sécurité, vous allez recevoir un email contenant un lien vous permettant de terminer le
-	changement de mot de passe.</target>
+        <source>Click the button below to change your password.</source>
+        <target>Cliquez sur le bouton ci-dessous pour changer votre mot de passe.</target>
       </trans-unit>
       <trans-unit id="22" approved="yes">
         <source>Reset Password</source>
@@ -301,6 +298,13 @@ Ce compte est désactivé. Merci de contacter un administrateur.
       <trans-unit id="36" approved="yes">
         <source>Unable to check the captcha from the server (%error%).</source>
         <target>Impossible de vérifier le captcha depuis le serveur (%error%).</target>
+      </trans-unit>
+      <trans-unit id="43" approved="yes">
+        <source>For security reasons, you
+will receive a confirmation email containing a link allowing you to complete the password change.</source>
+        <target>Pour des raisons
+	de sécurité, vous allez recevoir un email contenant un lien vous permettant de terminer le
+	changement de mot de passe.</target>
       </trans-unit>
     </body>
   </file>
