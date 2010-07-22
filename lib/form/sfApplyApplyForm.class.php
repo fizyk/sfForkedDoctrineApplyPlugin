@@ -123,11 +123,6 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
 
         $this->validatorSchema->setPostValidator( new sfValidatorAnd($postValidators) );
     }
-    
-    public function setValidate( $validate )
-    {
-        $this->validate = $validate;
-    }
   
     public function doSave($con = null)
     {
@@ -146,7 +141,6 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
     {
         $object = parent::updateObject($values);
         $object->setUserId($this->userId);
-        $object->setValidate($this->validate);
 
         // Don't break subclasses!
         return $object;
