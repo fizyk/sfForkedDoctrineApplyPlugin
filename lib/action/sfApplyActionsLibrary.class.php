@@ -40,7 +40,7 @@ class sfApplyActionsLibrary extends sfActions
         $guid = "n" . self::createGuid();
         $this->form->getObject()->setValidate( $guid );
         $date = new DateTime();
-        $profile->setValidateAt( $date->format( 'Y-m-d H:i:s' ) );
+        $this->form->getObject()->setValidateAt( $date->format( 'Y-m-d H:i:s' ) );
         $this->form->save();
         $confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' );
         if( $confirmation['apply'] )
