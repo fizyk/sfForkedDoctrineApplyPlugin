@@ -13,6 +13,7 @@ all:
       reset: true
       apply: true
       email: true
+      reset_logged: false
     routes:
       apply: /user/new
       reset: /user/password-reset

@@ -189,9 +189,8 @@ Wystąpił błąd podczas wysyłania wiadomości email. Proszę spróbować pono
         <target>Zapisz</target>
       </trans-unit>
       <trans-unit id="21" approved="yes">
-        <source>Click the button below to change your password. For security reasons, you
-will receive a confirmation email containing a link allowing you to complete the password change.</source>
-        <target>Kliknij przycisk poniżej by zmienić hasło. Ze względów bezpieczeństwa, otrzymasz wiadomość email zawierającą odnośnik pozwalający dokonać zmiany hasła.</target>
+        <source>Click the button below to change your password.</source>
+        <target>Kliknij przycisk poniżej by zmienić hasło.</target>
       </trans-unit>
       <trans-unit id="22" approved="yes">
         <source>Reset Password</source>
@@ -360,6 +359,11 @@ Twój adres email zostanie zmieniony na stałe.</target>
       <trans-unit id="42" approved="yes">
         <source>Your email has been changed.</source>
         <target>Twój adres e-mail został zmieniony.</target>
+      </trans-unit>
+      <trans-unit id="43" approved="yes">
+        <source>For security reasons, you
+will receive a confirmation email containing a link allowing you to complete the password change.</source>
+        <target>Ze względów bezpieczeństwa, otrzymasz wiadomość email zawierającą odnośnik pozwalający dokonać zmiany hasła.</target>
       </trans-unit>
     </body>
   </file>
