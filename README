@@ -143,7 +143,7 @@ from is fully internationalised (You might have to prepare i18n files for your l
 
     all:
       .settings:
-        i18n: on
+        i18n: true
 
 You can modify URL's for the sfApply module's action. To do that, simply add this options to your app.yml file:
 
