@@ -6,8 +6,8 @@
  */
 class sfApplyApplyForm extends sfGuardUserProfileForm
 {
-    private $validate = null;
-
+    private $userId;
+    
     public function configure()
     {
         parent::configure();
