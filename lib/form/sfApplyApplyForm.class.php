@@ -146,27 +146,6 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
         return $object;
     }
 
-    protected function isCaptchaEnabled()
-    {
-        return sfConfig::get('app_recaptcha_enabled');
-    }
-
-    protected function addCaptcha()
-    {
-        $this->widgetSchema['captcha'] = new sfWidgetFormReCaptcha(array(
-          'public_key' => sfConfig::get('app_recaptcha_public_key')
-        ));
-
-        $this->validatorSchema['captcha'] = new sfValidatorReCaptcha(array(
-          'private_key' => sfConfig::get('app_recaptcha_private_key')
-        ));
-        $this->validatorSchema['captcha']
-            ->setMessage('captcha', sfContext::getInstance()->getI18N()->
-                __('The captcha is not valid (%error%).', array(), 'sfForkedApply'))
-            ->setMessage('server_problem', sfContext::getInstance()->getI18N()->
-                __('Unable to check the captcha from the server (%error%).', array(), 'sfForkedApply'));
-    }
-
 
     protected function removeFields()
     {
