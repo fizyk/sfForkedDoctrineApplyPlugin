@@ -5,7 +5,6 @@ class sfApplyResetRequestForm extends sfForm
     public function configure()
     {
         parent::configure();
-        sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
 
         $this->setWidget('username_or_email',
           new sfWidgetFormInput( array(), array('maxlength' => 100)));
@@ -50,8 +49,10 @@ class sfApplyResetRequestForm extends sfForm
           'private_key' => sfConfig::get('app_recaptcha_private_key')
         ));
         $this->validatorSchema['captcha']
-            ->setMessage('captcha', __('The captcha is not valid (%error%).', array(), 'sfForkedApply'))
-            ->setMessage('server_problem', __('Unable to check the captcha from the server (%error%).', array(), 'sfForkedApply'));
+            ->setMessage('captcha', sfContext::getInstance()->getI18N()->
+                __('The captcha is not valid (%error%).', array(), 'sfForkedApply'))
+            ->setMessage('server_problem', sfContext::getInstance()->getI18N()->
+                __('Unable to check the captcha from the server (%error%).', array(), 'sfForkedApply'));
     }
     
     public function getStylesheets()

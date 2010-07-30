@@ -13,7 +13,6 @@ abstract class PluginsfGuardUserProfileForm extends BasesfGuardUserProfileForm
     public function setup()
     {
         parent::setup();
-        sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
     }
     
     public function getStylesheets()
