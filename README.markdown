@@ -143,7 +143,7 @@ from is fully internationalised (You might have to prepare i18n files for your l
 
     all:
       .settings:
-        i18n: on
+        i18n: true
 
 You can modify URL's for the sfApply module's action. To do that, simply add this options to your app.yml file:
 
@@ -219,9 +219,10 @@ Now, when user will try to edit their email, he'll receive confirmation email on
 
 It is possible, although not recommended to disable email confirmations for the following actions:
 
-* Apply - new users will be registered and logged as soon as they submit valid apply form.
-* Password reset - this will disable the reset request, password change will be possible only for logged in users.
-* Email edit - new email will immediately replace old one.
+* Apply (apply) - new users will be registered and logged as soon as they submit valid apply form.
+* Password reset (reset) - this will disable the reset request, password change will be possible only for logged in users.
+* Email edit (email) - new email will immediately replace old one.
+* Password reset for logged users (reset_logged) - this will send confirmation email for logged users (default is disabled).
 
 To disable confirmation emails for any of this actions, simply add and modify following options to application's app.yml file:
 
@@ -233,6 +234,7 @@ To disable confirmation emails for any of this actions, simply add and modify fo
           reset: true
           apply: true
           email: true
+          reset_logged: false
 
 ###Login redirect###
 
