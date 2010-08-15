@@ -13,6 +13,12 @@ abstract class PluginsfGuardUserProfileForm extends BasesfGuardUserProfileForm
     public function setup()
     {
         parent::setup();
+
+        //unset type field if it's set.
+        if( isset( $this['type'] ) )
+        {
+           unset( $this['type'] );
+        }
     }
 
     protected function isCaptchaEnabled()
