@@ -6,7 +6,7 @@
  *
  * @author fizyk
  */
-class sfApplyActionsLibrary extends sfActions
+class BasesfApplyActions extends sfActions
 {
   //When user is applying for new account
   public function executeApply(sfRequest $request)
