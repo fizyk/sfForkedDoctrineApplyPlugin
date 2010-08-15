@@ -185,6 +185,7 @@ class BasesfApplyActions extends sfActions
       if( sfConfig::get( 'app_sfForkedApply_mail_editable' ) )
       {
         $profile->setEmail( $profile->getEmailNew() );
+        $profile->getUser()->setEmailAddress( $profile->getEmailNew() );
         $profile->setEmailNew( null );
         $profile->save();
         $this->getUser()->setFlash( 'sf_forked_apply',
@@ -320,6 +321,7 @@ class BasesfApplyActions extends sfActions
         else
         {
           $profile->setEmail( $this->form->getValue( 'email' ) );
+          $profile->getUser()->setEmailAddress( $this->form->getValue( 'email' ) );
           $profile->save();
           $this->getUser()->setFlash( 'sf_forked_apply',
               sfContext::getInstance()->getI18N()->
