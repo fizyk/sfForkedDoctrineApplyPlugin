@@ -280,3 +280,4 @@ jabber/xmpp at fizyk@jabbim.pl and follow his adventures on his [homepage](http:
 * French - Pierre Grandin
 * Italian - Alessandro Rossi
 * Polish - Grzegorz Śliwiński
+* Russian - Pentium133
