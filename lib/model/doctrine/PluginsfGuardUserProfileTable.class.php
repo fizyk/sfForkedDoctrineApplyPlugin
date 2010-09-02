@@ -31,4 +31,13 @@ class PluginsfGuardUserProfileTable extends Doctrine_Table
         }
         return $query->andWhere( $query->getRootAlias().'.validate IS NOT NULL' );
     }
+
+    public function getProfilesWithUserQuery( Doctrine_Query $query = null )
+    {
+        if( !$query )
+        {
+            $query = $this->createQuery( 'p' );
+        }
+        return $query->leftJoin( $query->getRootAlias().'.User u' );
+    }
 }
