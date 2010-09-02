@@ -19,6 +19,18 @@ abstract class PluginsfGuardUserProfile extends BasesfGuardUserProfile
      */
     public function getFullname()
     {
-        return $this->getFirstname().' '.$this->getLastname();
+        return trim( $this->getFirstname().' '.$this->getLastname() );
+    }
+
+    public function  __toString()
+    {
+        if( $this->getFirstname() !== null || $this->getLastname() !== null  )
+        {
+            return $this->getLastname();
+        }
+        else
+        {
+            return $this->getUser()->getUsername();
+        }
     }
 }
