@@ -9,7 +9,7 @@ the modifications.
 
 ##Requirements##
 * symfony 1.4
-* sfDoctrineGuardPlugin - installed and configured
+* sfDoctrineGuardPlugin 5.x - installed and configured
 
 Requirements should be similar as the original plugin, although I can only be
 sure of symfony 1.4.
@@ -94,6 +94,32 @@ You can also add your own columns or redeclare to the provided model instead of 
         #...
 
 ##Upgrade##
+
+### sfForkedDoctrineApply 1.4.x series and sfDoctrineGuard 5.x###
+
+Upgrading to sfDoctrineGuard 5.0.0 from pevious release can be tiresome and lengthy operation.
+Here are few tips to help with that task:
+  * Remember to drop all relations to sfGuarduser model from your models, and all
+relations between sfDoctrineGuard's models first.
+  * Change your model's foreign key feilds declaration to integer (not int(4) anymore).
+  * Create migrations, migrate your database, rebuild your models.
+  * upgrade sfDoctrineGuard.
+  * redeclare email field in sfDoctrineGuard, since you'll have it empty at first.
+
+    sfGuardUser:
+      columns:
+        email_address:
+          type: string(255)
+    #      notnull: true
+          unique: true
+
+  * Run migrations, migrate and rebuild your models.
+  * Once that's completed, run **symfony sfForkedDoctrineApply:upgrade-proiles**
+  * Starting next version (1.5.x probably) sfGuardUserProfile will be dropping
+it's own email field in favour of sfGuardUser's one.
+
+
+###1.3.x###
 
 If you're upgrading from release earlier than 1.3.0, remember to create migrations:
 
