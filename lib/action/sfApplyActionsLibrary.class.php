@@ -11,6 +11,9 @@ class sfApplyActionsLibrary extends sfActions
   //When user is applying for new account
   public function executeApply(sfRequest $request)
   {
+    //If user is logged in, we're forwarding him to settings page from apply
+    $this->forwardIf($this->getUser()->isAuthenticated(), 'sfApply', 'settings');
+
     // we're getting default or customized applyForm for the task
     if( !( ($this->form = $this->newForm( 'applyForm' ) ) instanceof sfGuardUserProfileForm) )
     {
