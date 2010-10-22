@@ -37,7 +37,7 @@ class BasesfApplyActions extends sfActions
         $formValues = array_merge( $formValues, array('captcha' => $captcha)  );
       }
         //binding request form parameters with form
-      $this->form->bind( $formValues, $request->getFiles( $form->getName() ) );
+      $this->form->bind( $formValues, $request->getFiles( $this->form->getName() ) );
       if ($this->form->isValid())
       {
         $guid = "n" . self::createGuid();
@@ -269,7 +269,7 @@ class BasesfApplyActions extends sfActions
     }
     if ($request->isMethod('post'))
     {
-      $this->form->bind( $request->getParameter( $this->form->getName() ), $request->getFiles($form->getName()) );
+      $this->form->bind( $request->getParameter( $this->form->getName() ), $request->getFiles($this->form->getName()) );
       if ($this->form->isValid())
       {
         $this->form->save();
