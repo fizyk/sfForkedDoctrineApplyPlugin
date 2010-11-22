@@ -21,6 +21,28 @@ abstract class PluginsfGuardUserProfile extends BasesfGuardUserProfile
     {
         return trim( $this->getFirstname().' '.$this->getLastname() );
     }
+    
+    /**
+     * Returns user's email address
+     * @return type 
+     * @deprecated depreciated since version 1.5
+     * @see sfGuardUser::getEmailAddress()
+     */
+    public function getEmail()
+    {
+        return $this->getUser()->getEmailAddress();
+    }
+    
+    /**
+     * Set's user email address
+     * @param type $email 
+     * @deprecated depreciated since version 1.5
+     * @see sfGuardUser::getEmailAddress()
+     */
+    public function setEmail( $email )
+    {
+        $this->getUser()->setEmailAddress($email);
+    }
 
     public function  __toString()
     {

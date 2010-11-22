@@ -30,9 +30,9 @@ class sfValidatorApplyEditMail extends sfValidatorSchema
         $originalValues = $value;
 
         //We're retrieving object if any exists
-        $object = Doctrine_Core::getTable('sfGuardUserProfile')->createQuery('a')
-                ->select( 'a.email, a.id' )
-                ->where('a.email = ?', $value)->fetchOne();
+        $object = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')
+                ->select( 'u.email_address, u.id' )
+                ->where('u.email_address = ?', $value)->fetchOne();
 
         // if no object or if we're updating the object, it's ok
         if (!$object || $this->isUpdate($object, $value))

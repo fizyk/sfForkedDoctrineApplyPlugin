@@ -5,17 +5,13 @@ sfGuardUserProfile:
     user_id:
       type: integer
       notnull: true
-    email:
-      type: string(80)
-      notnull: true
-      unique: true
     email_new:
-      type: string(80)
+      type: string(255)
       unique: true
     firstname:
-      type: string(30)
+      type: string(255)
     lastname:
-      type: string(70)
+      type: string(255)
     validate_at:
       type: timestamp
     validate:

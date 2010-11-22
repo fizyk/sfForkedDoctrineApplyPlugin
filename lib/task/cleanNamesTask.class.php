@@ -63,7 +63,7 @@ EOF;
           echo("The report below shows the NEW username only.\n\n");
           $first = false;
         }
-        echo("Username: " . $user->username . ' Fullname: ' . $user->Profile->fullname . ' Email: ' . $user->Profile->email . "\n");
+        echo("Username: " . $user->username . ' Fullname: ' . $user->Profile->fullname . ' Email: ' . $user->getEmailAddress() . "\n");
       }
       $profile = $user->getProfile();
       if (preg_match("/[\<\>\&\|]/", $profile->fullname))

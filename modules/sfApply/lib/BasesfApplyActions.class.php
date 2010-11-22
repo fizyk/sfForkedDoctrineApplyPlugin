@@ -132,14 +132,14 @@ class BasesfApplyActions extends sfActions
           if (strpos($username_or_email, '@') !== false)
           {
             $user = Doctrine::getTable('sfGuardUser')->createQuery('u')->
-                    innerJoin('u.Profile p')->where('p.email = ?', $username_or_email)->
+                    where('u.email = ?', $username_or_email)->
                     fetchOne();
 
           }
           else
           {
             $user = Doctrine::getTable('sfGuardUser')->createQuery('u')->
-                    where('username = ?', $username_or_email)->fetchOne();
+                    where('u.username = ?', $username_or_email)->fetchOne();
           }
           return $this->resetRequestBody($user);
         }
@@ -187,7 +187,6 @@ class BasesfApplyActions extends sfActions
     {
       if( sfConfig::get( 'app_sfForkedApply_mail_editable' ) )
       {
-        $profile->setEmail( $profile->getEmailNew() );
         $profile->getUser()->setEmailAddress( $profile->getEmailNew() );
         $profile->setEmailNew( null );
         $profile->save();
@@ -309,21 +308,20 @@ class BasesfApplyActions extends sfActions
             sfContext::getInstance()->getI18N()->__("Please verify your email on %1%",
                                                     array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
             'fullname' => $profile->getFullname(),
-            'email' => $profile->getEmail(),
+            'email' => $profile->getUser()->getEmailAddress(),
             'parameters' => array('username' => $profile->getUser()->getUsername(),
                                   'validate' => $profile->getValidate(),
-                                  'oldmail' => $profile->getEmail(),
+                                  'oldmail' => $profile->getUser()->getEmailAddress(),
                                   'newmail' => $profile->getEmailNew() ),
             'text' => 'sfApply/sendValidateEmailText',
             'html' => 'sfApply/sendValidateEmail'));
           $this->getUser()->setFlash( 'sf_forked_apply',
               sfContext::getInstance()->getI18N()->
               __( 'To complete email change, follow a link included in a confirmation email we have sent to your old email address: %OLDEMAIL%.',
-                  array( '%OLDEMAIL%' => $profile->getEmail() ), 'sfForkedApply' ) );
+                  array( '%OLDEMAIL%' => $profile->getUser()->getEmailAddress() ), 'sfForkedApply' ) );
         }
         else
         {
-          $profile->setEmail( $this->form->getValue( 'email' ) );
           $profile->getUser()->setEmailAddress( $this->form->getValue( 'email' ) );
           $profile->save();
           $this->getUser()->setFlash( 'sf_forked_apply',
@@ -363,7 +361,7 @@ class BasesfApplyActions extends sfActions
         sfContext::getInstance()->getI18N()->__("Please verify your account on %1%",
                                                 array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
         'fullname' => $profile->getFullname(),
-        'email' => $profile->getEmail(),
+        'email' => $profile->getUser()->getEmailAddress(),
         'parameters' => array('fullname' => $profile->getFullname(),
                                 'validate' => $profile->getValidate()),
         'text' => 'sfApply/sendValidateNewText',
@@ -521,7 +519,7 @@ class BasesfApplyActions extends sfActions
               ->__("Please verify your password reset request on %1%",
               array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
           'fullname' => $profile->getFullname(),
-          'email' => $profile->getEmail(),
+          'email' => $profile->getUser()->getEmailAddress(),
           'parameters' => array('fullname' => $profile->getFullname(),
                                   'validate' => $profile->getValidate(), 'username' => $user->getUsername()),
           'text' => 'sfApply/sendValidateResetText',
