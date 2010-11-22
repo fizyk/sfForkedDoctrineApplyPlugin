@@ -30,7 +30,7 @@ Installation should be simple as:
 
 However it is also possible to install it through archive:
 
-    symfony plugin:install sfForkedDoctrineApplyPlugin-1.3.0.tgz
+    symfony plugin:install sfForkedDoctrineApplyPlugin-1.5.0.tgz
 
 just place downloaded package in your project's root first.
 
@@ -95,54 +95,24 @@ You can also add your own columns or redeclare to the provided model instead of 
 
 ##Upgrade##
 
-### sfForkedDoctrineApply 1.4.x series and sfDoctrineGuard 5.x###
 
-Upgrading to sfDoctrineGuard 5.0.0 from pevious release can be tiresome and lengthy operation.
-Here are few tips to help with that task:
-  * Remember to drop all relations to sfGuarduser model from your models, and all
-relations between sfDoctrineGuard's models first.
-  * Change your model's foreign key feilds declaration to integer (not int(4) anymore).
-  * Create migrations, migrate your database, rebuild your models.
-  * upgrade sfDoctrineGuard.
-  * redeclare email field in sfDoctrineGuard, since you'll have it empty at first.
+### sfForkedDoctrineApply 1.5x ###
 
-    sfGuardUser:
-      columns:
-        email_address:
-          type: string(255)
-    #      notnull: true
-          unique: true
+If you're planning to upgrade to sfForked 1.5.x from versions olders than 1.4, 
+be sure to migrate to 1.4 before migrating to 1.5.
 
-  * Run migrations, migrate and rebuild your models.
-  * Once that's completed, run **symfony sfForkedDoctrineApply:upgrade-proiles**
-  * Starting next version (1.5.x probably) sfGuardUserProfile will be dropping
-it's own email field in favour of sfGuardUser's one.
+After migrating to 1.5 migrate databse, since we drop email field, and no longer 
+use profile email field in code. 
 
-
-###1.3.x###
-
-If you're upgrading from release earlier than 1.3.0, remember to create migrations:
-
-    ./symfony doctrine:generate-migrations-diff
-
-Review your migration files after this step. It'll probably try to drop and
-recreate sf_guard_profile table, you can remove those two operations from up()
-method and down() as well. After that migrate your database, build your model classes
-again:
 
     ./symfony doctrine:migrate
     ./symfony doctrine:build --all-classes
     ./symfony doctrine:clean-model-files
 
-You'll have left sfGuardUserProfileBasis* model, filter and form files inside your project's
-lib/filter/doctrine, lib/form/doctrine and lib/model/doctrine. Remove them as
-these classes extends ones that no longer exists within plugin.
 
-IMPORTANT: Since there are no longer any Basis files, you have to move any logic
-that you kept in those files to sfGuardUserProfile models, forms and filters.
+All calls to profile's email filed by getEmail or setEmail 
+methods will be redirected to user's getEmailAddress or setEmailAddress method.
 
-You can extend profile either with doctrine inheritance or just by merging your
-profile definition with sfForked's one (just define what you need
 
 ##Configuration##
 
