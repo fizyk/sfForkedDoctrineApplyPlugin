@@ -307,3 +307,9 @@ jabber/xmpp at fizyk@jabbim.pl and follow his adventures on his [homepage](http:
 * Italian - Alessandro Rossi
 * Polish - Grzegorz Śliwiński
 * Russian - Serg Puhoff
+
+Support
+------------
+sfForkedDoctrineApply is completely free, but you can support it's creator:
+
+[![Support sfForkedDoctrineApplyPlugin](http://www.pledgie.com/campaigns/13968.png?skin_name=chrome "Support sfForkedDoctrineApplyPlugin")]http://www.pledgie.com/campaigns/13968
