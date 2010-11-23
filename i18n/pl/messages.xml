@@ -112,6 +112,10 @@
         <source>This email is already in use by some one else</source>
         <target>Ten adres email jest już przez kogoś używany</target>
       </trans-unit>
+      <trans-unit id="28" approved="yes">
+        <source>Username or E-Mail</source>
+        <target>Login lub email</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
