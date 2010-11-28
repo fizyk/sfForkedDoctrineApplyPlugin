@@ -132,7 +132,7 @@ class BasesfApplyActions extends sfActions
           if (strpos($username_or_email, '@') !== false)
           {
             $user = Doctrine::getTable('sfGuardUser')->createQuery('u')->
-                    where('u.email = ?', $username_or_email)->
+                    where('u.email_address = ?', $username_or_email)->
                     fetchOne();
 
           }
