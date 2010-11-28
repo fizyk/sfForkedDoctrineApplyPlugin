@@ -201,10 +201,8 @@ rééessayer plus tard
         <target>Réinitialiser votre mot de passe</target>
       </trans-unit>
       <trans-unit id="23" approved="yes">
-        <source>Thank you for applying for an account. You will
-receive a verification
-email shortly. If you do not see that email, please be sure to check
-your "spam" or "bulk" folder.</source>
+        <source>Thank you for applying for an account. You will receive a verification
+email shortly. If you do not see that email, please be sure to check your "spam" or "bulk" folder.</source>
         <target>Merci de vous être enregistré. Vous allez recevoir un
 email de confirmation. Si vous ne trouvez pas
 ce message, pensez à vérifier vos dossiers 'Spam' ou 'Indésirables'.

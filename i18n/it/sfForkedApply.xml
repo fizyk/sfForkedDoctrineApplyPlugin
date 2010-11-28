@@ -201,10 +201,8 @@ Un errore è avvenuto durante l'invio della mail. Prego ritentare fra poco.
         <target>Resetta Password</target>
       </trans-unit>
       <trans-unit id="23" approved="yes">
-        <source>Thank you for applying for an account. You will
-receive a verification
-email shortly. If you do not see that email, please be sure to check
-your "spam" or "bulk" folder.</source>
+        <source>Thank you for applying for an account. You will receive a verification
+email shortly. If you do not see that email, please be sure to check your "spam" or "bulk" folder.</source>
         <target>Grazie per aver richiesto un account. A breve
 riceverai un'email di conferma. Se non la vedi controlla la cartella
 "spam" o "bulk".
