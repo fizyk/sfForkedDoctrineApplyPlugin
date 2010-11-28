@@ -44,11 +44,9 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
         $this->widgetSchema->moveField('password2', sfWidgetFormSchema::AFTER, 'password');
 
         //Settings for email fields
-        $email = $this->getWidget('email');
-        $class = get_class($email);
+        $this->setWidget( 'email', new sfWidgetFormInputText( array(), array('maxlength' => 255 ) ) );
         $this->setWidget('email2', 
-                new $class( array(), array('maxlength' => $email->getAttribute('maxlength') )
-        ) );
+                new sfWidgetFormInputText( array(), array('maxlength' => 255 ) ) );
         $this->widgetSchema->moveField( 'email2', sfWidgetFormSchema::AFTER, 'email' );
 
         //Firstname and lastname
@@ -85,7 +83,7 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
 
         $this->setValidator('email', new sfValidatorAnd( array(
             new sfValidatorEmail( array('required' => true, 'trim' => true) ),
-            new sfValidatorString( array('required' => true, 'max_length' => 80) ),
+            new sfValidatorString( array('required' => true, 'max_length' => 255) ),
             new sfValidatorDoctrineUnique(
                     array( 'model' => 'sfGuardUserProfile', 'column' => 'email'),
                     array('invalid' => 'An account with that email address already exists. If you have forgotten your password, click "cancel", then "Reset My Password."') )
