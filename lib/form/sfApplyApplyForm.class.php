@@ -5,9 +5,7 @@
  * @author fizyk
  */
 class sfApplyApplyForm extends sfGuardUserProfileForm
-{
-    private $userId;
-    
+{    
     public function configure()
     {
         parent::configure();
@@ -85,7 +83,7 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
             new sfValidatorEmail( array('required' => true, 'trim' => true) ),
             new sfValidatorString( array('required' => true, 'max_length' => 255) ),
             new sfValidatorDoctrineUnique(
-                    array( 'model' => 'sfGuardUserProfile', 'column' => 'email'),
+                    array('model' => 'sfGuardUser', 'column' => 'email_address'),
                     array('invalid' => 'An account with that email address already exists. If you have forgotten your password, click "cancel", then "Reset My Password."') )
         )));
 
@@ -131,18 +129,9 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
         // They must confirm their account first
         $user->setIsActive(false);
         $user->save();
-        $this->userId = $user->getId();
+        $this->getObject()->setUserId($user->getId());
 
         return parent::doSave($con);
-    }
-
-    public function updateObject($values = null)
-    {
-        $object = parent::updateObject($values);
-        $object->setUserId($this->userId);
-
-        // Don't break subclasses!
-        return $object;
     }
 
 

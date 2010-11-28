@@ -30,7 +30,7 @@ Installation should be simple as:
 
 However it is also possible to install it through archive:
 
-    symfony plugin:install sfForkedDoctrineApplyPlugin-1.5.2.tgz
+    symfony plugin:install sfForkedDoctrineApplyPlugin-1.5.4.tgz
 
 just place downloaded package in your project's root first.
 
