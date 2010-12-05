@@ -1,11 +1,10 @@
 # sfForkedDoctrineApply plugin #
-Forked from [sfDoctrineApply](http://www.symfony-project.org/plugins/sfDoctrineApplyPlugin) plugin (version 1.1.1).
+Originally forked from [sfDoctrineApply](http://www.symfony-project.org/plugins/sfDoctrineApplyPlugin) plugin (version 1.1.1).
 
-It's stripped of Zend Mail dependencies as proposed by stephenrs on symfony forums,
+It has been stripped of Zend Mail dependency as proposed by stephenrs on symfony forums,
 [here](http://forum.symfony-project.org/index.php/t/25217/)
 
-Thanks to punkave guys for the original plugin, and Big thanks to stephen for
-the modifications.
+For news about sfForkedDoctrineApplyPlugin, please visit [fizyk's website](http://www.fizyk.net.pl/blog/tag/sfForkedDoctrineApply).
 
 ##Requirements##
 * symfony 1.4
@@ -263,11 +262,14 @@ this partial by setting the `sf_apply_login` slot:
 
 ## Credits ##
 
-sfDoctrineApplyPlugin was written by Tom Boutell. He can be contacted
+sfDoctrineApplyPlugin was written by *Tom Boutell*. He can be contacted
 at [tom@punkave.com](mailto:tom@punkave.com). See also [www.punkave.com](http://www.punkave.com/) and
 [www.boutell.com](http://www.boutell.com/) for further information about his work.
 
 Changes resulting in forking the original plugin were written by [stephenrs](http://forum.symfony-project.org/index.php/u/11253/).
+
+Both Tom and Stephen deserves a Big thanks.
+
 sfForkedDoctrineApplyPlugin was created by Grzegorz Śliwiński as a result of those changes with some additions.
 You can contact him at [fizyk@fizyk.net.pl](mailto:fizyk@fizyk.net.pl) or through
 jabber/xmpp at fizyk@jabbim.pl and follow his adventures on his [homepage](http://www.fizyk.net.pl/).
@@ -282,4 +284,4 @@ Support
 ------------
 sfForkedDoctrineApply is completely free, but you can support it's creator:
 
-[![Support sfForkedDoctrineApplyPlugin](http://www.pledgie.com/campaigns/13968.png?skin_name=chrome "Support sfForkedDoctrineApplyPlugin")]http://www.pledgie.com/campaigns/13968
+[![Support sfForkedDoctrineApplyPlugin](http://www.pledgie.com/campaigns/13968.png?skin_name=chrome "Support sfForkedDoctrineApplyPlugin")](http://www.pledgie.com/campaigns/13968)
