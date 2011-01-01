@@ -5,6 +5,7 @@ sfGuardUserProfile:
     user_id:
       type: integer
       notnull: true
+      unique: true
     email_new:
       type: string(255)
       unique: true
@@ -26,6 +27,5 @@ sfGuardUserProfile:
       foreignType: one
       foreignAlias: Profile
   indexes:
-    user_id_unique:
-      fields: [user_id]
-      type: unique
+    validate:
+      fields: [validate]
