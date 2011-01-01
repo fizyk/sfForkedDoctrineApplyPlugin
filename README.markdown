@@ -272,7 +272,7 @@ Both Tom and Stephen deserves a Big thanks.
 
 sfForkedDoctrineApplyPlugin was created by Grzegorz Śliwiński as a result of those changes with some additions.
 You can contact him at [fizyk@fizyk.net.pl](mailto:fizyk@fizyk.net.pl) or through
-jabber/xmpp at fizyk@jabbim.pl and follow his adventures on his [homepage](http://www.fizyk.net.pl/).
+jabber at the same address and follow his adventures on his [homepage](http://www.fizyk.net.pl/).
 
 ###Translations###
 * French - Pierre Grandin
