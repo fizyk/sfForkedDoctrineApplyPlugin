@@ -270,7 +270,7 @@ Changes resulting in forking the original plugin were written by [stephenrs](htt
 
 Both Tom and Stephen deserves a Big thanks.
 
-sfForkedDoctrineApplyPlugin was created by Grzegorz Śliwiński as a result of those changes with some additions.
+sfForkedDoctrineApplyPlugin was created by Grzegorz Śliwiński as a result of those changes with some (more and more with each release) additions.
 You can contact him at [fizyk@fizyk.net.pl](mailto:fizyk@fizyk.net.pl) or through
 jabber at the same address and follow his adventures on his [homepage](http://www.fizyk.net.pl/).
 
@@ -281,8 +281,10 @@ jabber at the same address and follow his adventures on his [homepage](http://ww
 * Russian - Serg Puhoff
 * German - Daniel Hanke
 
-Support
+Support and Help
 ------------
 sfForkedDoctrineApply is completely free, but you can support it's creator:
 
 [![Support sfForkedDoctrineApplyPlugin](http://www.pledgie.com/campaigns/13968.png?skin_name=chrome "Support sfForkedDoctrineApplyPlugin")](http://www.pledgie.com/campaigns/13968)
+
+For help regarding this plugin, you can go to plugin's github issue tracker, or contact author via jabber/xmpp/gtalk protocol: [fizyk@fizyk.net.pl](xmpp:fizyk@fizyk.net.pl) or though e-mail: [fizyk@fizyk.net.pl](mailto:fizyk@fizyk.net.pl)
