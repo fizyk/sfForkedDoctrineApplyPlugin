@@ -97,7 +97,7 @@
         <target>Identifiant</target>
       </trans-unit>
       <trans-unit id="24" approved="yes">
-        <source>Username or email</source>
+        <source>Username or E-Mail</source>
         <target>Nom d'utilisateur ou email</target>
       </trans-unit>
       <trans-unit id="25" approved="yes">

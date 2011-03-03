@@ -93,7 +93,7 @@
         <target>Вход</target>
       </trans-unit>
       <trans-unit id="24" approved="yes">
-        <source>Username or email</source>
+        <source>Username or E-Mail</source>
         <target>Логин или Email</target>
       </trans-unit>
       <trans-unit id="25" approved="yes">
