@@ -97,8 +97,8 @@
         <target>Login</target>
       </trans-unit>
       <trans-unit id="24" approved="yes">
-        <source>Username or email</source>
-        <target>Nazwa użytkownika lub adres email</target>
+        <source>Username or E-Mail</source>
+        <target>Login lub e-mail</target>
       </trans-unit>
       <trans-unit id="25" approved="yes">
         <source>sign in</source>
