@@ -161,7 +161,7 @@ Each key's value represents route's url, you can change them as you want.
 Now sfForkedDoctrineApply makes use of the initialy created validate_at field,
 allowing you to expire validate codes. To remove all codes older than a required time just run:
 
-    ./symfony sfForkedDoctrineApply:clear-validation-codes --d="number_of_days"
+    ./symfony sfForkedDoctrineApply:clear-validation-codes -d="number_of_days"
 
 You can ommit the --d parameter, to leave the default value of 1 day.
 
