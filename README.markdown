@@ -29,7 +29,7 @@ Installation should be simple as:
 
 However it is also possible to install it through archive:
 
-    symfony plugin:install sfForkedDoctrineApplyPlugin-1.5.6.tgz
+    symfony plugin:install sfForkedDoctrineApplyPlugin-1.5.7.tgz
 
 just place downloaded package in your project's root first.
 
@@ -275,11 +275,12 @@ You can contact him at [fizyk@fizyk.net.pl](mailto:fizyk@fizyk.net.pl) or throug
 jabber at the same address and follow his adventures on his [homepage](http://www.fizyk.net.pl/).
 
 ###Translations###
+* Dutch - Jasper Moelker
 * French - Pierre Grandin
+* German - Daniel Hanke
 * Italian - Alessandro Rossi
 * Polish - Grzegorz Śliwiński
 * Russian - Serg Puhoff
-* German - Daniel Hanke
 * Spanish - Alex Otero
 
 Support and Help
