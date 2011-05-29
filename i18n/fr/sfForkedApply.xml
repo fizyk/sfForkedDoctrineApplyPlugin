@@ -112,11 +112,11 @@ password using the form below.</source>
       </trans-unit>
       <trans-unit id="13" approved="yes">
         <source>&lt;p&gt;
-For security reasons, a confirmation message has been sent to 
+For security reasons, a confirmation message has been sent to
 the email address associated with this account. Please check your
 email for that message. You will need to click on a link provided
 in that email in order to change your password. If you do not see
-the message, be sure to check your "spam" and "bulk" email folders.
+the message, be sure to check your &quot;spam&quot; and &quot;bulk&quot; email folders.
 &lt;/p&gt;
 &lt;p&gt;
 We apologize for the inconvenience.
@@ -126,7 +126,7 @@ Pour des raisons de sécurité, un email de confirmation a été envoyé
 à l'adresse associée à ce compte. Merci de vérifier votre boite de
 réception. Vous devrez cliquer sur le lien fourni dans cet email
 afin de pouvoir changer votre mot de passe. Si vous ne trouvez pas
-ce message, pensez à vérifier vos dossiers 'Spam' ou 'Indésirables'.
+ce message, pensez à vérifier vos dossiers  &quot;spam&quot; ou &quot;Indésirables&quot;.
 &lt;/p&gt;
 &lt;p&gt;
 Nous nous excusons pour la gêne occasionnée.
