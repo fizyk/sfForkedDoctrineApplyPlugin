@@ -125,6 +125,12 @@ In order to send emails with confirmation codes you've got to add these settings
 
 **apps/APPLICATION/config/app.yml**
 
+
+    sfForkedApply:
+      from:
+        email: "your@emailaddress.com"
+        fullname: "the staff at yoursite.com"
+    # that section is as a fallback only
     sfApplyPlugin:
       from:
         email: "your@emailaddress.com"
@@ -237,6 +243,10 @@ There are two settings regarding directing user after actions he takes within sf
 
     all:
       #...
+      sfForkedPlugin:
+        afterLogin: after_login_route
+        after: after_route
+      # as a fallback we use old options too:
       sfApplyPlugin:
         afterLogin: after_login_route
         after: after_route

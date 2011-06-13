@@ -242,7 +242,7 @@ class BasesfApplyActions extends sfActions
   public function executeResetCancel()
   {
     $this->getUser()->setAttribute('sfApplyReset', null);
-    return $this->redirect(sfConfig::get('app_sfApplyPlugin_after', '@homepage'));
+    return $this->redirect(sfConfig::get('app_sfForkedApply_after', sfConfig::get('app_sfApplyPlugin_after', '@homepage')));
   }
 
   public function executeSettings(sfRequest $request)
@@ -304,9 +304,10 @@ class BasesfApplyActions extends sfActions
           $date = new DateTime();
           $profile->setValidateAt( $date->format( 'Y-m-d H:i:s' ) );
           $profile->save();
-          $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
+          $this->mail(array('subject' => sfConfig::get('app_sfForkedApply_apply_subject', 
+                  sfConfig::get('app_sfApplyPlugin_apply_subject',
             sfContext::getInstance()->getI18N()->__("Please verify your email on %1%",
-                                                    array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
+                                                    array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply'))),
             'fullname' => $profile->getFullname(),
             'email' => $profile->getUser()->getEmailAddress(),
             'parameters' => array('username' => $profile->getUser()->getUsername(),
@@ -341,10 +342,10 @@ class BasesfApplyActions extends sfActions
    */
   protected function getFromAddress()
   {
-    $from = sfConfig::get('app_sfApplyPlugin_from', false);
+    $from = sfConfig::get('app_sfForkedApply_from', sfConfig::get('app_sfApplyPlugin_from', false));
     if (!$from)
     {
-      throw new Exception('app_sfApplyPlugin_from is not set');
+      throw new Exception('app_sfForkedApply_from is not set');
     }
     // i18n the full name
     return array('email' => $from['email'], 'fullname' => sfContext::getInstance()->getI18N()->__($from['fullname']));
@@ -357,9 +358,10 @@ class BasesfApplyActions extends sfActions
    */
   protected function sendVerificationMail( $profile )
   {
-    $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
+    $this->mail(array('subject' => sfConfig::get('app_sfForkedApply_apply_subject',
+                                    sfConfig::get('app_sfApplyPlugin_apply_subject',
         sfContext::getInstance()->getI18N()->__("Please verify your account on %1%",
-                                                array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
+                                                array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply'))),
         'fullname' => $profile->getFullname(),
         'email' => $profile->getUser()->getEmailAddress(),
         'parameters' => array('fullname' => $profile->getFullname(),
@@ -514,10 +516,11 @@ class BasesfApplyActions extends sfActions
     $profile->save();
     try
     {
-      $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_reset_subject',
+      $this->mail(array('subject' => sfConfig::get('app_sfForkedApply_reset_subject',
+                                    sfConfig::get('app_sfApplyPlugin_reset_subject',
               sfContext::getInstance()->getI18N()
               ->__("Please verify your password reset request on %1%",
-              array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
+              array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply'))),
           'fullname' => $profile->getFullname(),
           'email' => $profile->getUser()->getEmailAddress(),
           'parameters' => array('fullname' => $profile->getFullname(),
