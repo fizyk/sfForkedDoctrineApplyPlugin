@@ -243,7 +243,7 @@ There are two settings regarding directing user after actions he takes within sf
 
     all:
       #...
-      sfForkedPlugin:
+      sfForkedApply:
         afterLogin: after_login_route
         after: after_route
       # as a fallback we use old options too:
