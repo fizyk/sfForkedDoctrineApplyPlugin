@@ -98,17 +98,17 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
         $schema = $this->validatorSchema;
 
         // Hey Fabien, adding more postvalidators is kinda verbose!
-        $postValidator = $schema->getPostValidator();
+        $preValidator = $schema->getPreValidator();
 
-        $postValidators = array( 
+        $preValidators = array( 
             new sfValidatorSchemaCompare( 'password', sfValidatorSchemaCompare::EQUAL,
                     'password2', array(), array('invalid' => 'The passwords did not match.') ),
             new sfValidatorSchemaCompare( 'email', sfValidatorSchemaCompare::EQUAL,
                     'email2', array(), array('invalid' => 'The email addresses did not match.') ) );
 
-        if( $postValidator )
+        if( $preValidator )
         {
-            $postValidators[] = $postValidator;
+            $preValidators[] = $postValidator;
         }
 
         //Include captcha if enabled
@@ -117,7 +117,7 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
             $this->addCaptcha();
         }
 
-        $this->validatorSchema->setPostValidator( new sfValidatorAnd($postValidators) );
+        $this->validatorSchema->setPreValidator( new sfValidatorAnd($preValidators) );
     }
   
     public function doSave($con = null)
