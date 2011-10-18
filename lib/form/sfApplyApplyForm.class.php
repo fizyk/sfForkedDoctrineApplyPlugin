@@ -108,7 +108,7 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
 
         if( $preValidator )
         {
-            $preValidators[] = $postValidator;
+            $preValidators[] = $preValidator;
         }
 
         //Include captcha if enabled
