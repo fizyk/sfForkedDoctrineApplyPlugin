@@ -292,7 +292,7 @@ jabber at the same address and follow his adventures on his [homepage](http://ww
 * Polish - Grzegorz Śliwiński
 * Russian - Serg Puhoff
 * Spanish - Alex Otero
-* Portugese - Alan Candido
+* Portugese (Brazil) - Alan Candido
 
 Support and Help
 ------------

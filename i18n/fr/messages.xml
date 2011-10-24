@@ -26,11 +26,11 @@
       </trans-unit>
       <trans-unit id="6" approved="yes">
         <source>First Name</source>
-        <target>Nom</target>
+        <target>Prénom</target>
       </trans-unit>
       <trans-unit id="7" approved="yes">
         <source>Last name</source>
-        <target>Prénom</target>
+        <target>Nom</target>
       </trans-unit>
       <trans-unit id="8" approved="yes">
         <source>Usernames must contain only letters, numbers and underscores.</source>
